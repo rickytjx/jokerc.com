@@ -81,7 +81,7 @@ const PostLayout: React.FC<PostLayoutProps> = props => {
   const headings = useHeadings([code])
   const Component = useMemo(() => getMDXComponent(code), [code])
   const { readingTime } = useMemo(
-    () => getMDXExport<{ readingTime: ReadingTime }, unknown>(code),
+    () => getMDXExport(code),
     [code],
   )
 

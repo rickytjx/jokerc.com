@@ -28,9 +28,9 @@ const Header: React.FC<HeaderProps> = () => {
   const hasMounted = useHasMounted()
   const menus = useMemo(
     () => [
-      { label: t('nav.home'), href: '/' },
+      { label: t('nav.blog'), href: '/blog' },
       { label: t('nav.tags'), href: '/tags' },
-      { label: t('nav.about'), href: '/about' },
+      // { label: t('nav.about'), href: '/about' },
     ],
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [],
@@ -104,7 +104,7 @@ const Header: React.FC<HeaderProps> = () => {
                 {/* logo (desktop) */}
                 <Link href="/">
                   <img
-                    className="hidden sm:inline-block h-7 mr-4 cursor-pointer dark:invert"
+                    className="hidden sm:inline-block h-14 mr-4 cursor-pointer dark:invert"
                     src={config.logo}
                     alt="logo"
                   />
