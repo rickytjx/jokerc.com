@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useRef } from 'react'
 import Link from 'next/link'
-import DarkModeToggle from './DarkModeToggle'
+import DarkModeToggle from './DarkModeToggle.old'
 import config from '@/config'
 import { useBoolean, useSize } from 'ahooks'
 import { animated, useSpring, useTransition } from 'react-spring'
@@ -28,7 +28,7 @@ const Header: React.FC<HeaderProps> = () => {
   const hasMounted = useHasMounted()
   const menus = useMemo(
     () => [
-      { label: t('nav.blog'), href: '/blog' },
+      { label: t('nav.blog'), href: '/posts' },
       { label: t('nav.tags'), href: '/tags' },
       // { label: t('nav.about'), href: '/about' },
     ],
@@ -137,7 +137,18 @@ const Header: React.FC<HeaderProps> = () => {
                       </Link>
                     ))}
                   </div>
-                  <DarkModeToggle />
+                  <div className="flex gap-5">
+                    <DarkModeToggle />
+                    <Link key={config.rss.link} href={config.rss.link}>
+                      <a
+                        className="inline"
+                        title={config.rss.label}
+                        aria-label={config.rss.label}
+                      >
+                        {config.rss.icon}
+                      </a>
+                    </Link>
+                  </div>
                 </div>
               </div>
             </animated.div>

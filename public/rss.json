@@ -1,0 +1,16 @@
+{
+    "version": "https://jsonfeed.org/version/1",
+    "title": "Ricky Tang | RSS Feed",
+    "home_page_url": "https://jokerc.com",
+    "feed_url": "https://jokerc.com/rss.json",
+    "description": "Ricky Tang' Blog",
+    "icon": "https://jokerc.com/avatar.png",
+    "items": [
+        {
+            "id": "https://jokerc.com/posts/2022-08-05-mdx-test",
+            "url": "https://jokerc.com/posts/2022-08-05-mdx-test",
+            "title": "MDX Test",
+            "date_modified": "2022-08-05T13:53:39.000Z"
+        }
+    ]
+}

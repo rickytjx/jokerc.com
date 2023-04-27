@@ -1,11 +1,14 @@
 import React from 'react'
 import { animated, useSpring } from 'react-spring'
 import { useTheme } from 'next-themes'
+import useSound from '@/hooks/useSound'
 import useHasMounted from '@/hooks/useHasMounted'
 
 const DarkModeToggle = () => {
   const mounted = useHasMounted()
   const { resolvedTheme = 'light', setTheme } = useTheme()
+  const [playOn] = useSound('/sounds/switch.mp3')
+  const [playOff] = useSound('/sounds/switch.mp3', { playbackRate: 0.6 })
   const isDarkMode = resolvedTheme === 'dark'
   const properties = {
     moon: {
@@ -51,7 +54,10 @@ const DarkModeToggle = () => {
       strokeLinecap="round"
       strokeLinejoin="round"
       style={{ ...svgContainerProps, cursor: 'pointer' }}
-      onClick={() => setTheme(isDarkMode ? 'light' : 'dark')}
+      onClick={() => {
+        setTheme(isDarkMode ? 'light' : 'dark')
+        isDarkMode ? playOff() : playOn()
+      }}
     >
       <mask id="mask">
         <rect x="0" y="0" width="100%" height="100%" fill="white" />

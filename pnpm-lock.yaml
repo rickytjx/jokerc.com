@@ -17,6 +17,7 @@ specifiers:
   eslint: 8.17.0
   eslint-config-next: 12.1.6
   fast-glob: ^3.2.11
+  feed: ^4.2.2
   gray-matter: ^4.0.3
   hast-util-to-html: ^8.0.3
   hastscript: ^7.0.2
@@ -60,6 +61,7 @@ specifiers:
 dependencies:
   ahooks: registry.npmmirror.com/ahooks/3.7.6_react@18.2.0
   classnames: registry.npmmirror.com/classnames/2.3.2
+  feed: registry.npmmirror.com/feed/4.2.2
   i18next: registry.npmmirror.com/i18next/22.4.15
   lodash: registry.npmmirror.com/lodash/4.17.21
   mdx-bundler: registry.npmmirror.com/mdx-bundler/9.2.1_esbuild@0.14.54
@@ -2335,6 +2337,15 @@ packages:
     version: 2.0.1
     dependencies:
       format: registry.npmmirror.com/format/0.2.2
+
+  registry.npmmirror.com/feed/4.2.2:
+    resolution: {integrity: sha512-u5/sxGfiMfZNtJ3OvQpXcvotFpYkL0n9u9mM2vkui2nGo8b4wvDkJ8gAkYqbA8QpGyFCv3RK0Z+Iv+9veCS9bQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/feed/-/feed-4.2.2.tgz}
+    name: feed
+    version: 4.2.2
+    engines: {node: '>=0.4.0'}
+    dependencies:
+      xml-js: registry.npmmirror.com/xml-js/1.6.11
+    dev: false
 
   registry.npmmirror.com/fetch-blob/3.2.0:
     resolution: {integrity: sha512-7yAQpD2UMJzLi1Dqv7qFYnPbaPx7ZfFK6PiIxQ4PfkGPyNyl2Ugx+a/umUonmKqjhM4DnfbMvdX6otXq83soQQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/fetch-blob/-/fetch-blob-3.2.0.tgz}
@@ -5191,6 +5202,12 @@ packages:
       immutable: registry.npmmirror.com/immutable/4.3.0
       source-map-js: registry.npmmirror.com/source-map-js/1.0.2
 
+  registry.npmmirror.com/sax/1.2.4:
+    resolution: {integrity: sha512-NqVDv9TpANUjFm0N8uM5GxL36UgKi9/atZw+x7YFnQ8ckwFGKrl4xX4yWtrey3UJm5nP1kUbnYgLopqWNSRhWw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/sax/-/sax-1.2.4.tgz}
+    name: sax
+    version: 1.2.4
+    dev: false
+
   registry.npmmirror.com/scheduler/0.23.0:
     resolution: {integrity: sha512-CtuThmgHNg7zIZWAXi3AsyIzA3n4xx7aNyjwC2VJldO2LMVDhFK+63xGqq6CsJH4rTAt6/M+N4GhZiDYPx9eUw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/scheduler/-/scheduler-0.23.0.tgz}
     name: scheduler
@@ -5994,6 +6011,15 @@ packages:
     resolution: {integrity: sha512-l4Sp/DRseor9wL6EvV2+TuQn63dMkPjZ/sp9XkghTEbV9KlPS1xUsZ3u7/IQO4wxtcFB4bgpQPRcR3QCvezPcQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/wrappy/-/wrappy-1.0.2.tgz}
     name: wrappy
     version: 1.0.2
+
+  registry.npmmirror.com/xml-js/1.6.11:
+    resolution: {integrity: sha512-7rVi2KMfwfWFl+GpPg6m80IVMWXLRjO+PxTq7V2CDhoGak0wzYzFgUY2m4XJ47OGdXd8eLE8EmwfAmdjw7lC1g==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/xml-js/-/xml-js-1.6.11.tgz}
+    name: xml-js
+    version: 1.6.11
+    hasBin: true
+    dependencies:
+      sax: registry.npmmirror.com/sax/1.2.4
+    dev: false
 
   registry.npmmirror.com/yallist/4.0.0:
     resolution: {integrity: sha512-3wdGidZyq5PB084XLES5TpOSRA3wjXAlIWMhum2kRcv/41Sn2emQ0dycQW4uZXLejwKvg6EsvbdlVL+FYEct7A==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/yallist/-/yallist-4.0.0.tgz}

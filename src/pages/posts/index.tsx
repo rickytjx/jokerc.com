@@ -2,6 +2,7 @@ import React from 'react'
 import classNames from 'classnames'
 import styles from './styles.module.scss'
 import { getLatestPosts } from '@/utils/post'
+import generateRssFeed from '@/utils/rss'
 import { GetStaticProps } from 'next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import PostList, { PostListProps } from '@/components/PostList'
@@ -31,7 +32,8 @@ const Index: React.FC<BlogProps> = (props) => {
 }
 
 export const getStaticProps: GetStaticProps<any, { slug: string }> = async ({ locale }) => {
-  const posts = await getLatestPosts();
+  await generateRssFeed();
+  const posts = await getLatestPosts()
 
   return {
     props: {
