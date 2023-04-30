@@ -13,6 +13,10 @@ on:
 permissions:
   packages: write
 
+env:
+  # github.repository as <account>/<repo>
+  IMAGE_NAME: ${{ secrets.DOCKER_REGISTRY }}/rickytjx/jcblog
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
@@ -42,7 +46,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v4
         with:
-          images: jcblog:latest
+          images: ${{ env.IMAGE_NAME }}
       # Build and push Docker Image
       - name: Build and push
         uses: docker/build-push-action@v4
