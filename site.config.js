@@ -13,7 +13,7 @@ const config = {
   ],
   rss: { label: 'RSS', icon: <FiRss className="text-2xl" aria-hidden />, link: 'https://jokerc.com/rss.xml' },
   blogroll: [],
-  language: 'zh-CN', // en | zh-CN
+  language: 'en', // en | zh-CN
   toc: true, // table of content
   adjacentPosts: true, // prev next links
   markdown: {
