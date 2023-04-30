@@ -1,7 +1,7 @@
 name: GitHub Actions Build and Deploy Tencent Cloud
 
+# Controls when the workflow will run
 on:
-  workflow_dispatch
   push:
     branches:
       - main
