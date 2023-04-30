@@ -4,7 +4,7 @@
         <title>Ricky Tang | RSS Feed</title>
         <link>https://jokerc.com</link>
         <description>Ricky Tang' Blog</description>
-        <lastBuildDate>Sun, 30 Apr 2023 06:37:38 GMT</lastBuildDate>
+        <lastBuildDate>Sun, 30 Apr 2023 08:13:15 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <image>
@@ -14,10 +14,40 @@
         </image>
         <copyright>All rights reserved 2023, Ricky Tang</copyright>
         <item>
-            <title><![CDATA[MDX Test]]></title>
-            <link>https://jokerc.com/posts/2022-08-05-mdx-test</link>
-            <guid>https://jokerc.com/posts/2022-08-05-mdx-test</guid>
-            <pubDate>Fri, 05 Aug 2022 13:53:39 GMT</pubDate>
+            <title><![CDATA[MDX Syntax - CodePlayground]]></title>
+            <link>https://jokerc.com/posts/2023-04-27-mdx-syntax-code-playground</link>
+            <guid>https://jokerc.com/posts/2023-04-27-mdx-syntax-code-playground</guid>
+            <pubDate>Wed, 26 Apr 2023 16:00:05 GMT</pubDate>
+        </item>
+        <item>
+            <title><![CDATA[MDX Syntax - ThirdPartyEmbeds]]></title>
+            <link>https://jokerc.com/posts/2023-04-27-mdx-syntax-third-party-embeds</link>
+            <guid>https://jokerc.com/posts/2023-04-27-mdx-syntax-third-party-embeds</guid>
+            <pubDate>Wed, 26 Apr 2023 16:00:04 GMT</pubDate>
+        </item>
+        <item>
+            <title><![CDATA[MDX Syntax - NoteBlock Extensions]]></title>
+            <link>https://jokerc.com/posts/2023-04-27-mdx-syntax-note-block-extensions</link>
+            <guid>https://jokerc.com/posts/2023-04-27-mdx-syntax-note-block-extensions</guid>
+            <pubDate>Wed, 26 Apr 2023 16:00:03 GMT</pubDate>
+        </item>
+        <item>
+            <title><![CDATA[MDX Syntax - CodeBlock Extensions]]></title>
+            <link>https://jokerc.com/posts/2023-04-27-mdx-syntax-code-block-extensions</link>
+            <guid>https://jokerc.com/posts/2023-04-27-mdx-syntax-code-block-extensions</guid>
+            <pubDate>Wed, 26 Apr 2023 16:00:02 GMT</pubDate>
+        </item>
+        <item>
+            <title><![CDATA[MDX Syntax - Basic]]></title>
+            <link>https://jokerc.com/posts/2023-04-27-mdx-syntax-basic</link>
+            <guid>https://jokerc.com/posts/2023-04-27-mdx-syntax-basic</guid>
+            <pubDate>Wed, 26 Apr 2023 16:00:01 GMT</pubDate>
+        </item>
+        <item>
+            <title><![CDATA[MDX Syntax Guide]]></title>
+            <link>https://jokerc.com/posts/2023-04-27-mdx-syntax-guide</link>
+            <guid>https://jokerc.com/posts/2023-04-27-mdx-syntax-guide</guid>
+            <pubDate>Wed, 26 Apr 2023 16:00:00 GMT</pubDate>
         </item>
     </channel>
 </rss>

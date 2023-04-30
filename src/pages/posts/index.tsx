@@ -4,7 +4,6 @@ import styles from './styles.module.scss'
 import { getLatestPosts } from '@/utils/post'
 import generateRssFeed from '@/utils/rss'
 import { GetStaticProps } from 'next'
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import PostList, { PostListProps } from '@/components/PostList'
 
 export interface BlogProps {
@@ -16,7 +15,7 @@ const Index: React.FC<BlogProps> = (props) => {
 
   return (
     <>
-      <div className="container min-h-screen">
+      <div className="prose-container">
         <h2
           className={classNames(
             styles.title,
@@ -37,8 +36,7 @@ export const getStaticProps: GetStaticProps<any, { slug: string }> = async ({ lo
 
   return {
     props: {
-      posts,
-      ...(await serverSideTranslations(locale!, ['common'])),
+      posts
     },
   }
 }

@@ -2,8 +2,6 @@ import React, { PropsWithChildren } from 'react'
 import style from './styles.module.scss'
 import classNames from 'classnames'
 import Link from 'next/link'
-import { GetStaticProps } from 'next'
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 
 const Tag: React.FC<PropsWithChildren> = props => {
   return (
@@ -14,7 +12,7 @@ const Tag: React.FC<PropsWithChildren> = props => {
 }
 const Index: NextPageWithCustomProps = () => {
   return (
-    <div className={classNames('container py-12', style.about)}>
+    <div className={classNames('prose-container py-12', style.about)}>
       <h2>🎨 关于本站</h2>
       <p>搭建它的初衷主要是为了练习新技术，其次是记录笔记 + 分享一些平时遇到的问题解决经验，本站技术栈为 Next.js、MDX、Tailwind CSS、TypeScript</p>
 
@@ -54,6 +52,7 @@ const Index: NextPageWithCustomProps = () => {
         <li><Link href="https://leerob.io">https://leerob.io</Link></li>
         <li><Link href="https://blog.maximeheckel.com">https://blog.maximeheckel.com</Link></li>
         <li><Link href="https://vuepress.vuejs.org">https://vuepress.vuejs.org</Link></li>
+        <li><Link href="https://vitepress.dev">https://vitepress.dev</Link></li>
         <li><Link href="https://react-spring.dev">https://react-spring.dev</Link></li>
         <li><Link href="https://github.com/iissnan/hexo-theme-next">https://github.com/iissnan/hexo-theme-next</Link></li>
         <li><Link href="https://github.com/sanjinhub/hexo-theme-geek">https://github.com/sanjinhub/hexo-theme-geek</Link></li>
@@ -61,14 +60,6 @@ const Index: NextPageWithCustomProps = () => {
       </ul>
     </div>
   )
-}
-
-export const getStaticProps: GetStaticProps<any, { slug: string }> = async ({ locale }) => {
-  return {
-    props: {
-      ...(await serverSideTranslations(locale!, ['common'])),
-    },
-  }
 }
 
 export default Index

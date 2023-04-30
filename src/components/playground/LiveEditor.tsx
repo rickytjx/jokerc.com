@@ -4,31 +4,52 @@ import { NativeProps, withNativeProps } from '@/utils/native-props'
 import Highlight, { defaultProps, PrismTheme } from 'prism-react-renderer'
 import Editor from 'react-simple-code-editor'
 import { LiveContext } from './LiveProvider'
-import classNames from "classnames";
+import classNames from 'classnames'
 
 export interface LiveEditorProps extends NativeProps {
+  fontSize?: number
   disabled?: boolean
   theme?: PrismTheme
-  padding?: string | number
-  highlights?: number[]
+  highlightLines?: number[]
+  addedLines?: number[]
+  removedLines?: number[]
+  focusedLines?: number[]
+  errorLines?: number[]
+  warningLines?: number[]
+  lineNumbers?: boolean
 }
 
 const LiveEditor: React.FC<LiveEditorProps> = props => {
   const { code, language, onCodeChange } = useContext(LiveContext)
-  const { disabled, theme, padding = 15, highlights = [] } = props
+  const {
+    fontSize = 16,
+    disabled,
+    theme,
+    highlightLines = [],
+    addedLines = [],
+    removedLines = [],
+    focusedLines = [],
+    errorLines = [],
+    warningLines = [],
+    lineNumbers,
+  } = props
 
   return withNativeProps(
     props,
     <div className={styles.liveEditor}>
       <Editor
+        className={classNames('code-block', {
+          'has-focused-lines': focusedLines.length > 0,
+          'has-line-numbers': lineNumbers,
+        })}
         value={code}
         onValueChange={onCodeChange}
         disabled={disabled}
         tabSize={2}
-        padding={padding}
+        padding={{ top: '2em', right: '2em', bottom: '2em', left: lineNumbers ? '5em' : '2em' }}
         style={{
           fontFamily: '"Fira Code", monospace',
-          fontSize: 16,
+          fontSize,
           outline: 'none',
           // plain 中包含一些预设样式
           ...(theme?.plain || {}),
@@ -43,10 +64,29 @@ const LiveEditor: React.FC<LiveEditorProps> = props => {
                     {...getLineProps({
                       line,
                       key: i,
-                      className: classNames({ highlight: highlights.includes(i + 1) }),
+                      className: classNames({
+                        highlight: highlightLines.includes(i + 1),
+                        added: addedLines.includes(i + 1),
+                        removed: removedLines.includes(i + 1),
+                        focused: focusedLines.includes(i + 1),
+                        error: errorLines.includes(i + 1),
+                        warning: warningLines.includes(i + 1),
+                      }),
                     })}
                   >
                     <>
+                      {lineNumbers && (
+                        <span
+                          className="line-number"
+                          style={{
+                            display: 'inline-block',
+                            width: '3em',
+                            marginLeft: '-3em',
+                          }}
+                        >
+                          {i + 1}
+                        </span>
+                      )}
                       {line.map((token, key) => (
                         // eslint-disable-next-line react/jsx-key
                         <span {...getTokenProps({ token, key })} />

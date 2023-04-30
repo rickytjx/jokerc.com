@@ -3,10 +3,9 @@ import styles from './styles.module.scss'
 import { GetStaticProps } from 'next'
 import { getLatestPosts } from '@/utils/post'
 import Link from 'next/link'
-import { animated, useTransition } from 'react-spring'
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
-import { useTranslation } from 'next-i18next'
+import { animated, useTransition } from '@react-spring/web'
 import classNames from 'classnames'
+import useTranslation from '@/hooks/useTranslation'
 
 const FONT_MIN = 12
 const FONT_MAX = 48
@@ -24,7 +23,7 @@ export interface TagsProps {
 
 const Tags: NextPageWithCustomProps<TagsProps> = props => {
   const { tags } = props
-  const { t } = useTranslation('common')
+  const { t } = useTranslation()
   const transitions = useTransition(tags, {
     from: { scale: 0.5, opacity: 0 },
     enter: { scale: 1, opacity: 1 },
@@ -36,7 +35,7 @@ const Tags: NextPageWithCustomProps<TagsProps> = props => {
   const totalNum = useMemo(() => tags.reduce((acc, cur) => acc + cur.postsNum, 0), [tags])
 
   return (
-    <div className={classNames(styles.tags, 'container flex flex-col items-center justify-center')}>
+    <div className={classNames(styles.tags, 'prose-container flex flex-col items-center justify-center')}>
       <h2
         className={classNames(
           styles.title,
@@ -89,10 +88,7 @@ export const getStaticProps: GetStaticProps<any, { slug: string }> = async ({ lo
   }
 
   return {
-    props: {
-      tags: Object.values(tags),
-      ...(await serverSideTranslations(locale!, ['common'])),
-    },
+    props: { tags: Object.values(tags) },
   }
 }
 

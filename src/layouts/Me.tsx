@@ -13,9 +13,10 @@ const Tag: React.FC<PropsWithChildren> = props => {
 }
 const MeLayout: React.FC = () => {
   return (
-    <>
+    <div className="prose-container">
       <Splash />
-      <div className={classNames('container pb-12', style.about)}>
+      <div className={classNames('pb-12', style.me)}>
+
         <h2>About me</h2>
         <p>A full-stack development engineer (2013 - present), passionate about open source, working in the toB BI industry, my skills 👇🏻</p>
         <div className="flex items-start flex-wrap gap-2">
@@ -40,7 +41,7 @@ const MeLayout: React.FC = () => {
         </ul>
 
       </div>
-    </>
+    </div>
   )
 }
 

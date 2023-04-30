@@ -33,11 +33,11 @@
 
   // NoteBlock
   .note {
-    @apply relative px-8 py-px my-12 sm:rounded-[3px] border-l-[3px];
+    @apply relative px-8 py-px -mx-0 sm:-mx-[1.5ch] my-12 sm:rounded-[3px] border-l-[3px];
     //p { @apply m-0; }
     ul, ol { @apply pl-0; }
     &::before {
-      @apply absolute bg-white rounded-full -left-[26.5px] -top-[25px] w-[50px] h-[50px];
+      @apply absolute hidden sm:block bg-white rounded-full -left-[26.5px] -top-[25px] w-[50px] h-[50px];
     }
     &.tip {
       @apply bg-blue-300/30 border-blue-600;
@@ -79,7 +79,7 @@
     p { @apply m-0 }
   }
   ol {
-    counter-reset: list-item;
+    counter-reset: list-item 1;
     > li {
       counter-increment: list-item;
       &::before {

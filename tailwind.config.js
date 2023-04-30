@@ -27,18 +27,6 @@ module.exports = {
         floating: 'floating 4s ease-in-out infinite alternate',
       },
     },
-    container: {
-      padding: '1.5rem',
-      center: true,
-      // 两侧留白，最大宽度设为 768px
-      screens: {
-        sm: '640px',
-        md: '768px',
-        lg: '768px',
-        xl: '768px',
-        '2xl': '768px',
-      },
-    },
   },
   plugins: [],
 }

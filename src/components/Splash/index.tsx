@@ -1,13 +1,13 @@
 import React from 'react'
 import styles from './styles.module.scss'
-import config from '@/config'
+import config from 'config'
 import Link from 'next/link'
 import classNames from 'classnames'
 
 const Splash = () => {
   return (
-    <div className={classNames(styles.splash, 'splash relative my-12 sm:my-16')}>
-      <div className="container flex items-center">
+    <div className={classNames(styles.splash, 'relative my-12 sm:my-16')}>
+      <div className="flex items-center">
         {config.avatar && (
           <div className="relative">
             <img

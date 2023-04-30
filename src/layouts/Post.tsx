@@ -4,8 +4,7 @@ import { getMDXComponent, getMDXExport } from 'mdx-bundler/client'
 import Link from 'next/link'
 import dayjs from 'dayjs'
 import HeroImage from '@/components/HeroImage'
-import { useTranslation } from 'next-i18next'
-import { HiArrowSmLeft, HiArrowSmRight, HiOutlineClock } from 'react-icons/hi'
+import { HiArrowSmLeft, HiArrowSmRight, HiOutlineClock, HiOutlineCalendar } from 'react-icons/hi'
 import CodeBlock from '@/components/CodeBlock'
 import Blockquote from '@/components/Blockquote'
 import Image from '@/components/Image'
@@ -17,6 +16,8 @@ import { YouTube } from '@/components/embeds/YouTube'
 import { StackBlitz } from '@/components/embeds/StackBlitz'
 import { CodeSandbox } from '@/components/embeds/CodeSandbox'
 import { CodePen } from '@/components/embeds/CodePen'
+import config from 'config'
+import useTranslation from '@/hooks/useTranslation'
 
 const components = {
   code: CodeBlock,
@@ -63,7 +64,7 @@ export interface PostLayoutProps {
 }
 
 const PostLayout: React.FC<PostLayoutProps> = props => {
-  const { t } = useTranslation('common')
+  const { t } = useTranslation()
   const {
     code,
     frontmatter: {
@@ -81,22 +82,25 @@ const PostLayout: React.FC<PostLayoutProps> = props => {
   const headings = useHeadings([code])
   const Component = useMemo(() => getMDXComponent(code), [code])
   const { readingTime } = useMemo(
-    () => getMDXExport(code),
+    () => getMDXExport<{ readingTime: PostReadingTime }, unknown>(code),
     [code],
   )
 
   return (
-    <div className="container break-all">
+    <div className="prose-container break-all">
       <h1 className="mt-14 sm:mt-16 text-2xl sm:text-4xl text-black dark:text-white !leading-snug tracking-tight font-medium">
         {title}
       </h1>
-      {/* 最后更新时间 */}
       <div className="text-gray-500 dark:text-gray-300 mt-4">
         <div className="flex items-center text-sm">
           <span className="flex items-center">
-            <HiOutlineClock className="mr-1 text-lg" />
-            {t('post-page.last-updated')}
-            {dayjs(updateOn || date).format('LL')} • {readingTime.text}
+            {/* 最后更新时间 */}
+            <HiOutlineCalendar className="mr-1 text-base" />
+            {t('post-page.last-updated', { date: dayjs(updateOn || date).format('LL') })}
+            <span className="mx-2">•</span>
+            {/* 阅读时长估算 */}
+            <HiOutlineClock className="mr-1 text-base" />
+            {t('post-page.reading-time', { minutes: Math.ceil(readingTime.minutes) })}
           </span>
         </div>
       </div>
@@ -125,35 +129,37 @@ const PostLayout: React.FC<PostLayoutProps> = props => {
           </article>
         </div>
         {/* 侧边目录导航 */}
-        {toc && headings.length > 1 && (
+        {config.toc && toc && headings.length > 1 && (
           <TableOfContents className="hidden sm:block" headings={headings} />
         )}
       </div>
       <hr className="divider" />
-      <div className="mb-20 flex justify-between space-x-6 sm:space-x-12 sm:text-lg font-medium">
-        {/* 下一篇 */}
-        <span className="w-1/2">
-          {prevPost ? (
-            <Link href={prevPost.link}>
-              <a className="group flex h-full border border-zinc-400/20 rounded-xl p-3 sm:p-6 transition gap-2">
-                <HiArrowSmLeft className="sm:-mt-[1px] shrink-0 text-2xl sm:text-3xl text-primary transition ease-out-back duration-500 sm:group-hover:-translate-x-2" />
-                {prevPost.title}
-              </a>
-            </Link>
-          ) : null}
-        </span>
-        {/* 上一篇 */}
-        <span className="w-1/2 text-right">
-          {nextPost ? (
-            <Link href={nextPost.link}>
-              <a className="group flex justify-end h-full border border-zinc-400/20 rounded-xl p-3 sm:p-6 transition gap-2">
-                {nextPost.title}
-                <HiArrowSmRight className="sm:-mt-[1px] shrink-0 text-2xl sm:text-3xl text-primary transition ease-out-back duration-500 sm:group-hover:translate-x-2" />
-              </a>
-            </Link>
-          ) : null}
-        </span>
-      </div>
+      {config.adjacentPosts && (
+        <div className="mb-20 flex justify-between space-x-6 sm:space-x-12 sm:text-lg font-medium">
+          {/* 下一篇 */}
+          <span className="w-1/2">
+            {prevPost ? (
+              <Link href={prevPost.link}>
+                <a className="group flex h-full border border-zinc-400/20 rounded-xl p-3 sm:p-6 transition gap-2">
+                  <HiArrowSmLeft className="sm:-mt-[1px] shrink-0 text-2xl sm:text-3xl text-primary transition ease-out-back duration-500 sm:group-hover:-translate-x-2" />
+                  {prevPost.title}
+                </a>
+              </Link>
+            ) : null}
+          </span>
+          {/* 上一篇 */}
+          <span className="w-1/2 text-right">
+            {nextPost ? (
+              <Link href={nextPost.link}>
+                <a className="group flex justify-end h-full border border-zinc-400/20 rounded-xl p-3 sm:p-6 transition gap-2">
+                  {nextPost.title}
+                  <HiArrowSmRight className="sm:-mt-[1px] shrink-0 text-2xl sm:text-3xl text-primary transition ease-out-back duration-500 sm:group-hover:translate-x-2" />
+                </a>
+              </Link>
+            ) : null}
+          </span>
+        </div>
+      )}
     </div>
   )
 }
