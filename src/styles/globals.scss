@@ -37,6 +37,42 @@
       background-color: transparent;
     }
   }
+
+  .me {
+    p,
+    ul {
+      @apply my-4 leading-loose;
+    }
+
+    h2 {
+      @apply text-2xl font-medium mt-10 mb-4;
+    }
+
+    p {
+    }
+
+    ul {
+      list-style: inside;
+    }
+
+    a {
+      @apply text-primary underline hover:brightness-75;
+    }
+  }
+
+
+  .author {
+    a {
+      font-weight: inherit;
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: border .3s ease-in-out
+    }
+
+    a:hover {
+      @apply border-b border-solid border-zinc-500;
+    }
+  }
 }
 
 html,

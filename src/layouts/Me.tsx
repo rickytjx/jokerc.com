@@ -1,6 +1,4 @@
 import React, { PropsWithChildren } from 'react'
-import classNames from 'classnames'
-import style from '../styles/me.module.scss'
 import Link from 'next/link'
 import Splash from '../components/Splash'
 
@@ -15,8 +13,7 @@ const MeLayout: React.FC = () => {
   return (
     <div className="prose-container">
       <Splash />
-      <div className={classNames('pb-12', style.me)}>
-
+      <div className="me pb-12">
         <h2>About me</h2>
         <p>A full-stack development engineer (2013 - present), passionate about open source, working in the toB BI industry, my skills 👇🏻</p>
         <div className="flex items-start flex-wrap gap-2">
