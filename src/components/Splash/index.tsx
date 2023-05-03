@@ -23,7 +23,7 @@ const Splash = () => {
             <span>{config.title}</span>
           </h1>
           <span className="text-zinc-400">{config.desc}</span>
-          <div className="flex items-center gap-4">
+          <div className="grid grid-flow-col gap-4 w-20">
             {config.socials.map(social => (
               <Link key={social.link} href={social.link}>
                 <a

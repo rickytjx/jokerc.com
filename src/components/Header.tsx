@@ -4,6 +4,7 @@ import DarkModeToggle from './DarkModeToggle.old'
 import config from 'config'
 import { useBoolean, useSize } from 'ahooks'
 import { animated, useSpring, useTransition } from '@react-spring/web'
+import { RiArticleLine, RiPriceTag2Line } from "react-icons/ri";
 import BurgerMenu from '@/components/BurgerMenu'
 import {
   animationFrameScheduler,
@@ -28,8 +29,8 @@ const Header: React.FC<HeaderProps> = () => {
   const hasMounted = useHasMounted()
   const menus = useMemo(
     () => [
-      { label: t('nav.blog'), href: '/posts' },
-      { label: t('nav.tags'), href: '/tags' },
+      { label: t('nav.blog'), href: '/posts', icon: <RiArticleLine aria-hidden/> },
+      { label: t('nav.tags'), href: '/tags', icon: <RiPriceTag2Line aria-hidden/> },
       // { label: t('nav.about'), href: '/about' },
     ],
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -96,21 +97,20 @@ const Header: React.FC<HeaderProps> = () => {
               style={barStyles}
             >
               <div className="prose-container h-full flex items-center justify-between">
-                <BurgerMenu
+                {/* <BurgerMenu
                   className="cursor-pointer sm:hidden"
                   isOpen={expanded}
                   onChange={toggleExpanded}
-                />
+                /> */}
                 {/* logo (desktop) */}
                 <Link href="/">
                   <img
-                    className="hidden sm:inline-block h-8 mr-4 cursor-pointer dark:invert"
+                    className="inline-block h-6 sm:h-8 mr-4 cursor-pointer dark:invert"
                     src={config.logo}
                     alt="logo"
                   />
                 </Link>
-                {/* nav (mobile) */}
-                <animated.div
+                {/* <animated.div
                   className="sm:hidden absolute left-0 right-0 top-[50px] bg-white dark:bg-zinc-900/100 z-10 border-b border-zinc-400/10 overflow-hidden"
                   style={styles}
                 >
@@ -125,31 +125,39 @@ const Header: React.FC<HeaderProps> = () => {
                       </animated.div>
                     ))}
                   </div>
-                </animated.div>
-                {/* nav (desktop) */}
-                <div className="flex items-center">
-                  <div className="hidden sm:block mr-8">
+                </animated.div> */}
+                <div className="grid grid-flow-col gap-4">
+                  {/* nav (desktop) */}
+                  <div className="hidden sm:block m-auto">
                     {menus.map(menu => (
                       <Link key={menu.href} href={menu.href}>
-                        <a className="font-medium text-base mx-2 py-2 px-4 rounded-lg leading-loose transition hover:bg-slate-200/50 dark:hover:bg-zinc-800/50">
+                        <a className="font-medium text-base py-2 px-4 rounded-lg leading-loose transition hover:bg-slate-200/50 dark:hover:bg-zinc-800/50">
                           {menu.label}
                         </a>
                       </Link>
                     ))}
                   </div>
-                  <div className="flex gap-5">
-                    <DarkModeToggle />
-                    <Link key={config.rss.link} href={config.rss.link}>
-                      <a
-                        className="hidden sm:block"
-                        title={config.rss.label}
-                        aria-label={config.rss.label}
-                        target="_blank"
-                      >
-                        {config.rss.icon}
+                  {/* nav (mobile) */}
+                  {menus.map(menu => (
+                    <Link key={menu.href} href={menu.href}>
+                      <a className="sm:hidden m-auto text-xl">
+                        {menu.icon}
                       </a>
                     </Link>
+                  ))}
+                  <div className="m-auto">
+                    <DarkModeToggle />
                   </div>
+                  <Link key={config.rss.link} href={config.rss.link}>
+                    <a
+                      className="hidden sm:block m-auto"
+                      title={config.rss.label}
+                      aria-label={config.rss.label}
+                      target="_blank"
+                    >
+                      {config.rss.icon}
+                    </a>
+                  </Link>
                 </div>
               </div>
             </animated.div>
