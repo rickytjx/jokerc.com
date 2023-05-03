@@ -62,6 +62,7 @@ export const getStaticProps: GetStaticProps<any, { slug: string }> = async ({ pa
 
   return {
     props: {
+      slug,
       code,
       frontmatter,
       prevPost: prev ? { link: `/posts/${prev.slug}`, title: prev.frontmatter.title } : null,

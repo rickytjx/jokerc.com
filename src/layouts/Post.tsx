@@ -8,6 +8,7 @@ import { HiArrowSmLeft, HiArrowSmRight, HiOutlineClock, HiOutlineCalendar } from
 import CodeBlock from '@/components/CodeBlock'
 import Blockquote from '@/components/Blockquote'
 import Image from '@/components/Image'
+import Author from '@/components/Author'
 import DarkModeToggle from '@/components/DarkModeToggle'
 import UnorderedList from '@/components/lists/UnorderedList'
 import OrderedList from '@/components/lists/OrderedList'
@@ -66,6 +67,7 @@ export interface PostLayoutProps {
 const PostLayout: React.FC<PostLayoutProps> = props => {
   const { t } = useTranslation()
   const {
+    slug,
     code,
     frontmatter: {
       title,
@@ -75,17 +77,19 @@ const PostLayout: React.FC<PostLayoutProps> = props => {
       toc = true,
       heroImage,
       heroImageAspectRatio = '16 / 9',
+      isShare = false,
+      shareUrl
     },
     prevPost,
     nextPost,
   } = props
+
   const headings = useHeadings([code])
   const Component = useMemo(() => getMDXComponent(code), [code])
   const { readingTime } = useMemo(
     () => getMDXExport<{ readingTime: PostReadingTime }, unknown>(code),
     [code],
   )
-
   return (
     <div className="prose-container break-all">
       <h1 className="mt-14 sm:mt-16 text-2xl sm:text-4xl text-black dark:text-white !leading-snug tracking-tight font-medium">
@@ -127,6 +131,8 @@ const PostLayout: React.FC<PostLayoutProps> = props => {
             {/* @ts-ignore */}
             <Component components={components} />
           </article>
+          {/* 作者&版权信息 */}
+          <Author title={title} slug={slug} isShare={isShare} shareUrl={shareUrl} />
         </div>
         {/* 侧边目录导航 */}
         {config.toc && toc && headings.length > 1 && (
