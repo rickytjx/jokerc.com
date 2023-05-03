@@ -141,9 +141,10 @@ const Header: React.FC<HeaderProps> = () => {
                     <DarkModeToggle />
                     <Link key={config.rss.link} href={config.rss.link}>
                       <a
-                        className="inline"
+                        className="hidden sm:block"
                         title={config.rss.label}
                         aria-label={config.rss.label}
+                        target="_blank"
                       >
                         {config.rss.icon}
                       </a>

@@ -10,11 +10,11 @@ const createPost = async () => {
   await fs.writeFile(
     path.resolve(process.cwd(), `./posts/${dayjs().format('YYYY-MM-DD')}-${filename}.mdx`),
     `---
-title: '${pangu.spacing(filename)}'
-date: '${dayjs().format('YYYY-MM-DD HH:mm:ss')}'
-tags:${tags.map(tag => `\n  - '${tag}'`).join('')}
----
-`,
+    title: '${pangu.spacing(filename)}'
+    date: '${dayjs().format('YYYY-MM-DD HH:mm:ss')}'
+    tags:${tags.map(tag => `\n  - '${tag}'`).join('')}
+    ---
+    `,
   );
 };
 
