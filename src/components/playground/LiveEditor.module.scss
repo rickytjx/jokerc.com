@@ -11,9 +11,39 @@
     float: left;
 
     :global {
-      .textarea,
+      textarea,
       pre {
         white-space: pre !important;
+        padding: 2em 1em !important;
+        @media (min-width: 640px) {
+          padding: 2em 2em !important;
+        }
+      }
+
+      .line-number {
+        @apply inline-block w-[3em] -ml-[3em];
+      }
+    }
+  }
+
+  :global {
+
+    .has-line-numbers {
+      textarea,
+      pre {
+        padding-left: 3em !important;
+        @media (min-width: 640px) {
+          padding-left: 5em !important;
+        }
+      }
+    }
+
+    .line-number {
+      width: 1.8em !important;
+      margin-left: -1.8em !important;
+      @media (min-width: 640px) {
+        width: 3em !important;
+        margin-left: -3em !important;
       }
     }
   }

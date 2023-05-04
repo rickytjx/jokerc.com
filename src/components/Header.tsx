@@ -140,12 +140,12 @@ const Header: React.FC<HeaderProps> = () => {
                   {/* nav (mobile) */}
                   {menus.map(menu => (
                     <Link key={menu.href} href={menu.href}>
-                      <a className="sm:hidden m-auto text-xl">
+                      <a className="sm:hidden m-auto text-xl transition-opacity opacity-80 hover:opacity-100">
                         {menu.icon}
                       </a>
                     </Link>
                   ))}
-                  <div className="m-auto">
+                  <div className="m-auto sm:opacity-100 transition-opacity opacity-80 hover:opacity-100">
                     <DarkModeToggle />
                   </div>
                   <Link key={config.rss.link} href={config.rss.link}>

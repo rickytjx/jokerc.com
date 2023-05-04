@@ -46,7 +46,6 @@ const LiveEditor: React.FC<LiveEditorProps> = props => {
         onValueChange={onCodeChange}
         disabled={disabled}
         tabSize={2}
-        padding={{ top: '2em', right: '2em', bottom: '2em', left: lineNumbers ? '5em' : '2em' }}
         style={{
           fontFamily: '"Fira Code", monospace',
           fontSize,
@@ -78,11 +77,6 @@ const LiveEditor: React.FC<LiveEditorProps> = props => {
                       {lineNumbers && (
                         <span
                           className="line-number"
-                          style={{
-                            display: 'inline-block',
-                            width: '3em',
-                            marginLeft: '-3em',
-                          }}
                         >
                           {i + 1}
                         </span>

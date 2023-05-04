@@ -188,10 +188,15 @@ html[data-theme='light'] .code-playground {
       color: #fff;
 
       &.highlight {
-        margin: 0 -2em;
-        padding: 0 2em;
+        margin: 0 -2em 0 -1em;
+        padding: 0 1em;
         background: linear-gradient(#0369a1 0%, #0369a1) no-repeat, rgba(255, 255, 255, 0.05);
         background-size: 3px;
+
+        @media (min-width: 640px) {
+          margin: 0 -2em;
+          padding: 0 2em;
+        }
       }
 
       .token.comment,
