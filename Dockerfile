@@ -28,6 +28,7 @@ COPY . .
 
 RUN yarn global add pnpm
 RUN pnpm build
+RUN pnpm postbuild
 
 FROM base as production-stage
 WORKDIR /app

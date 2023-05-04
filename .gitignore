@@ -41,3 +41,7 @@ yarn-error.log*
 post-helpers
 public/images/*
 !public/images/mdx-test.webp
+public/atom.xml
+public/rss.xml
+public/rss.json
+public/sitemap.xml

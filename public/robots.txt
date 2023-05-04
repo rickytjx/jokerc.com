@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://jokerc.com
+
+# Sitemaps
+Sitemap: https://jokerc.com/sitemap.xml
