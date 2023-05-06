@@ -1,14 +1,15 @@
 import React from 'react'
-import useImage from '@/hooks/useImage'
-import { NativeProps, withNativeProps } from '@/utils/native-props'
 import { AiOutlineLoading } from 'react-icons/ai'
+import useImage from '@/hooks/useImage'
+import type { NativeProps } from '@/utils/native-props'
+import { withNativeProps } from '@/utils/native-props'
 
-export interface HeroImage extends NativeProps {
+export interface HeroImageProps extends NativeProps {
   src: string
   aspectRatio?: string // 长 / 宽
 }
 
-const HeroImage: React.FC<HeroImage> = props => {
+const HeroImage: React.FC<HeroImageProps> = (props) => {
   const { src, aspectRatio = '16 / 9' } = props
   const { dataUrl, status } = useImage(src)
 

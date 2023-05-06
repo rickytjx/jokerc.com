@@ -4,7 +4,7 @@ import { useTheme } from 'next-themes'
 import useSound from '@/hooks/useSound'
 import useHasMounted from '@/hooks/useHasMounted'
 
-const DarkModeToggle = () => {
+function DarkModeToggle() {
   const mounted = useHasMounted()
   const { resolvedTheme = 'light', setTheme } = useTheme()
   const [playOn] = useSound('/sounds/switch.mp3')
@@ -27,7 +27,7 @@ const DarkModeToggle = () => {
     },
     springConfig: { mass: 4, tension: 250, friction: 35 },
   }
-  const { r, transform, cx, cy, opacity } = isDarkMode ? properties['moon'] : properties['sun']
+  const { r, transform, cx, cy, opacity } = isDarkMode ? properties.moon : properties.sun
   const svgContainerProps = useSpring({
     transform,
     config: properties.springConfig,
@@ -40,7 +40,8 @@ const DarkModeToggle = () => {
   })
   const linesProps = useSpring({ opacity, config: properties.springConfig })
 
-  if (!mounted) return null
+  if (!mounted)
+    return null
 
   return (
     <animated.svg

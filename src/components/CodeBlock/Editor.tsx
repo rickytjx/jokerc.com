@@ -1,7 +1,8 @@
 import React from 'react'
-import LiveEditor, { LiveEditorProps } from '@/components/playground/LiveEditor'
+import type { LiveEditorProps } from '@/components/playground/LiveEditor'
+import LiveEditor from '@/components/playground/LiveEditor'
 
-const Editor: React.FC<LiveEditorProps> = props => {
+const Editor: React.FC<LiveEditorProps> = (props) => {
   return <LiveEditor {...props} />
 }
 

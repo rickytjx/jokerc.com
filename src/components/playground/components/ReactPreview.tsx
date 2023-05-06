@@ -1,15 +1,15 @@
 import { useDebounceEffect } from 'ahooks'
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { LiveContext } from '../LiveProvider'
 import { generateElement } from '../utils/transpile'
 
 function resolveElement(node: React.ReactNode) {
-  const Element =
-    typeof node === 'function' ? node : () => <>{React.isValidElement(node) ? node : null}</>
+  const Element
+    = typeof node === 'function' ? node : () => <>{React.isValidElement(node) ? node : null}</>
   return <Element />
 }
 
-const ReactPreview = () => {
+function ReactPreview() {
   const { code, scope } = useContext(LiveContext)
   const [node, setNode] = useState<React.ReactNode>()
 
@@ -21,6 +21,10 @@ const ReactPreview = () => {
     { wait: 200 },
   )
 
+  useEffect(() => {
+
+  }, [])
+
   function transpileAsync(newCode: string) {
     // - transformCode may be synchronous or asynchronous.
     // - transformCode may throw an exception or return a rejected promise, e.g.
@@ -30,7 +34,7 @@ const ReactPreview = () => {
     try {
       const transformResult = newCode
 
-      return Promise.resolve(transformResult).then(transformedCode => {
+      return Promise.resolve(transformResult).then((transformedCode) => {
         const renderElement = (node: React.ReactNode) => {
           // 一定要通过这种方式更新组件，因为 setState 支持传入一个function，但是组件本身又是一个方法，直接通过 setState(FunctionalElement)
           // 会让 react 以为你传入的组件是一个更新 state 的函数
@@ -45,7 +49,8 @@ const ReactPreview = () => {
 
         renderElement(generateElement(input))
       })
-    } catch (e) {
+    }
+    catch (e) {
       return Promise.resolve()
     }
   }

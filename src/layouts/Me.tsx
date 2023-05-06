@@ -1,8 +1,9 @@
-import React, { PropsWithChildren } from 'react'
+import type { PropsWithChildren } from 'react'
+import React from 'react'
 import Link from 'next/link'
 import Splash from '../components/Splash'
 
-const Tag: React.FC<PropsWithChildren> = props => {
+const Tag: React.FC<PropsWithChildren> = (props) => {
   return (
     <span className="inline-block rounded border bg-amber-500/10 text-amber-900 border-amber-500/20 dark:bg-amber-500/10 dark:text-amber-500 px-2 py-1 text-xs leading-none">
       {props.children}

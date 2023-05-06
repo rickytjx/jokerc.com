@@ -1,15 +1,15 @@
-import PostLayout from '../../layouts/Post'
-import { GetStaticPaths, GetStaticProps } from 'next'
+import path from 'node:path'
+import type { GetStaticPaths, GetStaticProps } from 'next'
 import { bundleMDX } from 'mdx-bundler'
 import remarkGfm from 'remark-gfm'
 import remarkDirective from 'remark-directive'
 import rehypeSlug from 'rehype-slug'
 import rehypeAutolinkHeadings from 'rehype-autolink-headings'
-import remarkMdxMetaToProps from '@/lib/remark-mdx-meta-to-props.js'
-import remarkNoteBlock from '@/lib/remark-note-block.js'
 import remarkReadingTime from 'remark-reading-time'
 import remarkReadingMdxTime from 'remark-reading-time/mdx'
-import path from 'path'
+import PostLayout from '../../layouts/Post'
+import remarkAdmonitions from '@/lib/remark-admonitions.js'
+import remarkMdxMetaToProps from '@/lib/remark-mdx-meta-to-props.js'
 import { getAdjacentPosts, getAllPostPaths, getSlugByPostPath } from '@/utils/post'
 
 export default PostLayout
@@ -39,7 +39,7 @@ export const getStaticProps: GetStaticProps<any, { slug: string }> = async ({ pa
         remarkGfm,
         remarkMdxMetaToProps,
         remarkDirective,
-        remarkNoteBlock,
+        remarkAdmonitions,
         remarkReadingTime,
         remarkReadingMdxTime,
       ]

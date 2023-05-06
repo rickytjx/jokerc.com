@@ -7,7 +7,7 @@ export interface PostListProps {
   posts: Post[]
 }
 
-const PostList: React.FC<PostListProps> = props => {
+const PostList: React.FC<PostListProps> = (props) => {
   const { posts } = props
   const { t } = useTranslation()
 
@@ -15,12 +15,12 @@ const PostList: React.FC<PostListProps> = props => {
     <div className="flex-1">
       {posts.map(({ frontmatter, slug }, idx) => (
         <div key={idx}>
-          {(idx === 0 ||
-            dayjs(posts[idx - 1].frontmatter.date).year() !== dayjs(frontmatter.date).year()) && (
+          {(idx === 0
+            || dayjs(posts[idx - 1].frontmatter.date).year() !== dayjs(frontmatter.date).year()) && (
               <h2 className="font-medium text-2xl before:content-['#_'] before:text-primary">
                 {dayjs(frontmatter.date).year()}
               </h2>
-            )}
+          )}
           <article key={idx} className="my-8">
             <h3 className="text-lg leading-[1.2em]">
               <Link href={`/posts/${slug}`}>

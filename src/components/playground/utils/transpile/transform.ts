@@ -1,4 +1,5 @@
-import { Transform, transform as _transform } from 'sucrase'
+import type { Transform } from 'sucrase'
+import { transform as _transform } from 'sucrase'
 
 const opts = { transforms: ['jsx', 'imports'] as Transform[] }
 

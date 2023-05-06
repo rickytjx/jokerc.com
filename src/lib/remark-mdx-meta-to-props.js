@@ -6,7 +6,7 @@ const parser = Parser.extend(jsx())
 
 /** @type {import('unified').Plugin<[], import('mdast').Root>} */
 export default function remarkMdxMetaToProps() {
-  return tree => {
+  return (tree) => {
     visit(tree, 'code', (node, index, parent) => {
       const code = JSON.stringify(`${node.value}`)
       const value = `<code className="language-${node.lang || 'text'}" ${node.meta || ''}>{${code}}</code>`

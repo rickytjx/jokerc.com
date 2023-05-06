@@ -1,11 +1,11 @@
-const fs = require('fs').promises;
-const path = require('path');
-const dayjs = require('dayjs');
-const pangu = require('pangu');
+const fs = require('node:fs').promises
+const path = require('node:path')
+const dayjs = require('dayjs')
+const pangu = require('pangu')
 
 // npm run new:post name [tag1] [tag2] ...
-const createPost = async () => {
-  const [, , filename, ...tags] = process.argv;
+async function createPost() {
+  const [, , filename, ...tags] = process.argv
 
   await fs.writeFile(
     path.resolve(process.cwd(), `./posts/${dayjs().format('YYYY-MM-DD')}-${filename}.mdx`),
@@ -15,7 +15,7 @@ const createPost = async () => {
     tags:${tags.map(tag => `\n  - '${tag}'`).join('')}
     ---
     `,
-  );
-};
+  )
+}
 
-createPost();
+createPost()

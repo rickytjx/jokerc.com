@@ -1,10 +1,10 @@
 import React from 'react'
-import styles from './styles.module.scss'
 import config from 'config'
 import Link from 'next/link'
 import classNames from 'classnames'
+import styles from './styles.module.scss'
 
-const Splash = () => {
+function Splash() {
   return (
     <div className={classNames(styles.splash, 'relative my-12 sm:my-16')}>
       <div className="flex items-center">
@@ -19,7 +19,7 @@ const Splash = () => {
           </div>
         )}
         <div className="flex flex-col justify-between ml-6 space-y-3 leading-none">
-          <h1 className="text-3xl sm:text-4xl font-medium">
+          <h1 className="w-fit text-3xl sm:text-4xl font-medium">
             <span>{config.title}</span>
           </h1>
           <span className="text-zinc-400 w-[12rem] sm:w-auto">{config.desc}</span>

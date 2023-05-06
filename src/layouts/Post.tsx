@@ -1,29 +1,49 @@
-import React, { DependencyList, useEffect, useMemo, useState } from 'react'
-import TableOfContents, { TableOfContentsProps } from '@/components/TableOfContents'
+import type { DependencyList } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { getMDXComponent, getMDXExport } from 'mdx-bundler/client'
 import Link from 'next/link'
 import dayjs from 'dayjs'
+import { HiArrowSmLeft, HiArrowSmRight, HiOutlineCalendar, HiOutlineClock } from 'react-icons/hi'
+import config from 'config'
+import type { TableOfContentsProps } from '@/components/TableOfContents'
+import TableOfContents from '@/components/TableOfContents'
 import HeroImage from '@/components/HeroImage'
-import { HiArrowSmLeft, HiArrowSmRight, HiOutlineClock, HiOutlineCalendar } from 'react-icons/hi'
 import CodeBlock from '@/components/CodeBlock'
-import Blockquote from '@/components/Blockquote'
-import Image from '@/components/Image'
 import Author from '@/components/Author'
 import DarkModeToggle from '@/components/DarkModeToggle'
 import UnorderedList from '@/components/lists/UnorderedList'
 import OrderedList from '@/components/lists/OrderedList'
 import ListItem from '@/components/lists/ListItem'
-import { YouTube } from '@/components/embeds/YouTube'
-import { StackBlitz } from '@/components/embeds/StackBlitz'
-import { CodeSandbox } from '@/components/embeds/CodeSandbox'
-import { CodePen } from '@/components/embeds/CodePen'
-import config from 'config'
+import YouTube from '@/components/embeds/YouTube'
+import StackBlitz from '@/components/embeds/StackBlitz'
+import CodeSandbox from '@/components/embeds/CodeSandbox'
+import CodePen from '@/components/embeds/CodePen'
+import Bilibili from '@/components/embeds/Bilibili'
 import useTranslation from '@/hooks/useTranslation'
+import tagRenderer from '@/utils/tag-renderer'
 
 const components = {
+  h1: tagRenderer('h1'),
+  h2: tagRenderer('h2'),
+  h3: tagRenderer('h3'),
+  h4: tagRenderer('h4'),
+  h5: tagRenderer('h5'),
+  h6: tagRenderer('h6'),
+  p: tagRenderer('p'),
+  a: tagRenderer('a'),
+  blockquote: tagRenderer('blockquote'),
+  table: tagRenderer('table'),
+  thead: tagRenderer('thead'),
+  tbody: tagRenderer('tbody'),
+  tr: tagRenderer('tr'),
+  th: tagRenderer('th'),
+  td: tagRenderer('td'),
+  img: tagRenderer('img'),
+  em: tagRenderer('em'),
+  strong: tagRenderer('strong'),
+  hr: tagRenderer('hr'),
+  del: tagRenderer('del'),
   code: CodeBlock,
-  blockquote: Blockquote,
-  img: Image,
   ul: UnorderedList,
   ol: OrderedList,
   li: ListItem,
@@ -32,6 +52,7 @@ const components = {
   StackBlitz,
   CodeSandbox,
   CodePen,
+  Bilibili,
 }
 
 function useHeadings(deps: DependencyList = []) {
@@ -50,7 +71,6 @@ function useHeadings(deps: DependencyList = []) {
         level: Number(element.tagName.substring(1)),
       }))
     setHeadings(elements)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, deps)
 
   return headings
@@ -64,7 +84,7 @@ export interface PostLayoutProps {
   nextPost?: { link: string; title: string }
 }
 
-const PostLayout: React.FC<PostLayoutProps> = props => {
+const PostLayout: React.FC<PostLayoutProps> = (props) => {
   const { t } = useTranslation()
   const {
     slug,
@@ -78,7 +98,7 @@ const PostLayout: React.FC<PostLayoutProps> = props => {
       heroImage,
       heroImageAspectRatio = '16 / 9',
       isShare = false,
-      shareUrl
+      shareUrl,
     },
     prevPost,
     nextPost,
@@ -128,7 +148,8 @@ const PostLayout: React.FC<PostLayoutProps> = props => {
           )}
           {/* markdown 内容 */}
           <article className="markdown-body w-full mt-10">
-            {/* @ts-ignore */}
+            {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
+            {/* @ts-expect-error */}
             <Component components={components} />
           </article>
           {/* 作者&版权信息 */}
@@ -144,25 +165,29 @@ const PostLayout: React.FC<PostLayoutProps> = props => {
         <div className="mb-20 flex justify-between space-x-6 sm:space-x-12 sm:text-lg font-medium">
           {/* 下一篇 */}
           <span className="w-1/2">
-            {prevPost ? (
+            {prevPost
+              ? (
               <Link href={prevPost.link}>
                 <a className="group flex h-full border border-zinc-400/20 rounded-xl p-3 sm:p-6 transition gap-2">
                   <HiArrowSmLeft className="sm:-mt-[1px] shrink-0 text-2xl sm:text-3xl text-primary transition ease-out-back duration-500 sm:group-hover:-translate-x-2" />
                   {prevPost.title}
                 </a>
               </Link>
-            ) : null}
+                )
+              : null}
           </span>
           {/* 上一篇 */}
           <span className="w-1/2 text-right">
-            {nextPost ? (
+            {nextPost
+              ? (
               <Link href={nextPost.link}>
                 <a className="group flex justify-end h-full border border-zinc-400/20 rounded-xl p-3 sm:p-6 transition gap-2">
                   {nextPost.title}
                   <HiArrowSmRight className="sm:-mt-[1px] shrink-0 text-2xl sm:text-3xl text-primary transition ease-out-back duration-500 sm:group-hover:translate-x-2" />
                 </a>
               </Link>
-            ) : null}
+                )
+              : null}
           </span>
         </div>
       )}

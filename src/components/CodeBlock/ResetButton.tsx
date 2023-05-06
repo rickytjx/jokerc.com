@@ -3,7 +3,7 @@ import { animated } from '@react-spring/web'
 import { MdSettingsBackupRestore } from 'react-icons/md'
 import useBoop from '@/hooks/useBoop'
 
-const ResetButton: React.FC<{ onClick: () => void }> = props => {
+const ResetButton: React.FC<{ onClick: () => void }> = (props) => {
   const { onClick } = props
   const [style, trigger] = useBoop({ scale: 1.1 })
 

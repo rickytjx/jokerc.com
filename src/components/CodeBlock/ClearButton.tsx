@@ -1,9 +1,9 @@
 import React from 'react'
 import { animated } from '@react-spring/web'
-import { TbRefresh } from 'react-icons/tb'
+import { TbBan } from 'react-icons/tb'
 import useBoop from '@/hooks/useBoop'
 
-const RefreshButton: React.FC<{ onClick: () => void }> = (props) => {
+const ResetButton: React.FC<{ onClick: () => void }> = (props) => {
   const { onClick } = props
   const [style, trigger] = useBoop({ scale: 1.1 })
 
@@ -14,9 +14,9 @@ const RefreshButton: React.FC<{ onClick: () => void }> = (props) => {
       onMouseEnter={trigger}
       onClick={onClick}
     >
-      <TbRefresh onClick={onClick} />
+      <TbBan />
     </animated.button>
   )
 }
 
-export default RefreshButton
+export default ResetButton

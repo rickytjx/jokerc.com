@@ -1,17 +1,16 @@
-import { GetStaticPaths, GetStaticProps } from 'next'
+import type { GetStaticPaths, GetStaticProps } from 'next'
 import DefaultLayout from '@/layouts/Default'
 import { getLatestPosts } from '@/utils/post'
 
 export default DefaultLayout
 
 export const getStaticPaths: GetStaticPaths<{ slug: string }> = async () => {
-  const posts = await getLatestPosts({ orderBy: 'asc' })
+  const posts = await getLatestPosts()
   const tags = new Set<string>()
 
   for (const post of posts) {
-    for (const tag of post.frontmatter.tags || []) {
+    for (const tag of post.frontmatter.tags || [])
       tags.add(tag)
-    }
   }
 
   return {
@@ -22,9 +21,9 @@ export const getStaticPaths: GetStaticPaths<{ slug: string }> = async () => {
   }
 }
 
-export const getStaticProps: GetStaticProps<any, { slug: string }> = async ({ params, locale }) => {
+export const getStaticProps: GetStaticProps<any, { slug: string }> = async ({ params }) => {
   const { slug } = params!
-  const posts = await getLatestPosts({ orderBy: 'asc' })
+  const posts = await getLatestPosts()
 
   return {
     props: {

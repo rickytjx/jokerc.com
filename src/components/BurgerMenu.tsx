@@ -1,13 +1,14 @@
 import React from 'react'
 import { animated, useSpring } from '@react-spring/web'
-import { NativeProps, withNativeProps } from '@/utils/native-props'
+import type { NativeProps } from '@/utils/native-props'
+import { withNativeProps } from '@/utils/native-props'
 
 export interface BurgerMenuProps extends NativeProps {
   isOpen: boolean
   onChange: (isOpen: boolean) => void
 }
 
-const BurgerMenu: React.FC<BurgerMenuProps> = props => {
+const BurgerMenu: React.FC<BurgerMenuProps> = (props) => {
   const { isOpen, onChange } = props
 
   const first = useSpring({

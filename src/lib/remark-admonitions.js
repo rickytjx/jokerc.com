@@ -16,17 +16,18 @@ import { h } from 'hastscript'
 // :::
 
 /** @type {import('unified').Plugin<[], import('mdast').Root>} */
-export default function remarkNoteBlock() {
-  return tree => {
-    visit(tree, node => {
+export default function remarkAdmonitions() {
+  return (tree) => {
+    visit(tree, (node) => {
       if (node.type === 'containerDirective') {
-        if (!['tip', 'warning', 'danger'].includes(node.name)) return
+        if (!['tip', 'warning', 'danger'].includes(node.name))
+          return
 
         const data = node.data || (node.data = {})
         const tagName = 'div'
 
         data.hName = tagName
-        data.hProperties = h(tagName, { class: `note ${node.name}` }).properties
+        data.hProperties = h(tagName, { class: `admonition ${node.name}` }).properties
       }
     })
   }

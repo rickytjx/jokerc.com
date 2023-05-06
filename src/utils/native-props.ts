@@ -12,23 +12,24 @@ export function withNativeProps<P extends NativeProps>(props: P, element: ReactE
   const p = {
     ...element.props,
   }
-  if (props.className) {
+  if (props.className)
     p.className = classNames(element.props.className, props.className)
-  }
+
   if (props.style) {
     p.style = {
       ...p.style,
       ...props.style,
     }
   }
-  if (props.tabIndex !== undefined) {
+  if (props.tabIndex !== undefined)
     p.tabIndex = props.tabIndex
-  }
+
   for (const key in props) {
-    if (!props.hasOwnProperty(key)) continue
-    if (key.startsWith('data-') || key.startsWith('aria-')) {
+    // eslint-disable-next-line no-prototype-builtins
+    if (!props.hasOwnProperty(key))
+      continue
+    if (key.startsWith('data-') || key.startsWith('aria-'))
       p[key] = props[key]
-    }
   }
   return React.cloneElement(element, p)
 }

@@ -1,9 +1,9 @@
 import React from 'react'
-import { animated, useSpring, useTransition, config as builtinConfig } from '@react-spring/web'
+import { animated, config as builtinConfig, useSpring, useTransition } from '@react-spring/web'
 import { useTheme } from 'next-themes'
+import classNames from 'classnames'
 import { withNoSSR } from '@/utils'
 import useSound from '@/hooks/useSound'
-import classNames from 'classnames'
 
 const config = { mass: 3, tension: 200, friction: 30 }
 const starPaths = [
@@ -12,7 +12,7 @@ const starPaths = [
   'M61 0L63.7009 7.29909L71 10L63.7009 12.7009L61 20L58.2991 12.7009L51 10L58.2991 7.29909L61 0Z',
 ]
 
-const DarkModeToggle = () => {
+function DarkModeToggle() {
   const { resolvedTheme = 'light', setTheme, forcedTheme } = useTheme()
   const [playOn] = useSound('/sounds/switch.mp3')
   const [playOff] = useSound('/sounds/switch.mp3', { playbackRate: 0.6 })
@@ -76,7 +76,8 @@ const DarkModeToggle = () => {
         'cursor-not-allowed': disabled,
       })}
       onClick={() => {
-        if (disabled) return
+        if (disabled)
+          return
         setTheme(isDarkMode ? 'light' : 'dark')
         isDarkMode ? playOff() : playOn()
       }}

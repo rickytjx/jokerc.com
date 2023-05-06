@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react'
-import LiveProvider, { LiveProviderProps } from '@/components/playground/LiveProvider'
 import Editor from './Editor'
+import type { LiveProviderProps } from '@/components/playground/LiveProvider'
+import LiveProvider from '@/components/playground/LiveProvider'
 
 // 静态围栏代码块高亮
 const FencedCodeBlock: React.FC<{
@@ -9,29 +10,30 @@ const FencedCodeBlock: React.FC<{
   highlights?: string
   raw?: boolean
   lineNumbers?: boolean
-}> = props => {
+}> = (props) => {
   const { language, code, highlights = '', raw, lineNumbers } = props
 
   const highlightLines = useMemo(() => {
-    if (!highlights) return []
+    if (!highlights)
+      return []
     return highlights.split(',').reduce<number[]>((acc, cur) => {
       const limits = cur.split('-')
       const rows = []
       if (limits.length === 1) {
         rows.push(parseInt(limits[0]))
-      } else if (limits.length === 2) {
+      }
+      else if (limits.length === 2) {
         const start = parseInt(limits[0])
         const end = parseInt(limits[1])
-        for (let i = start; i <= end; i++) {
+        for (let i = start; i <= end; i++)
           rows.push(i)
-        }
       }
       return acc.concat(rows)
     }, [])
   }, [highlights])
 
-  const { parsedCode, addedLines, removedLines, focusedLines, errorLines, warningLines } =
-    useMemo(() => {
+  const { parsedCode, addedLines, removedLines, focusedLines, errorLines, warningLines }
+    = useMemo(() => {
       const lines = code.split('\n')
       let parsedCode = ''
       const addedLines: number[] = []
@@ -52,18 +54,18 @@ const FencedCodeBlock: React.FC<{
             const fn = {
               '++': () => addedLines.push(i + 1),
               '--': () => removedLines.push(i + 1),
-              focus: () => focusedLines.push(i + 1),
-              error: () => errorLines.push(i + 1),
-              warning: () => warningLines.push(i + 1),
+              'focus': () => focusedLines.push(i + 1),
+              'error': () => errorLines.push(i + 1),
+              'warning': () => warningLines.push(i + 1),
             }[mark]
 
-            if (fn) {
+            if (fn)
               fn()
-            }
 
-            parsedCode += codeLine + '\n'
-          } else {
-            parsedCode += line + '\n'
+            parsedCode += `${codeLine}\n`
+          }
+          else {
+            parsedCode += `${line}\n`
           }
         }
       }

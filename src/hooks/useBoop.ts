@@ -28,14 +28,14 @@ function useBoop({
   })
 
   useEffect(() => {
-    if (!isBooped) return
+    if (!isBooped)
+      return
 
     const timeoutId = setTimeout(() => {
       setIsBooped(false)
     }, timing)
 
     return () => clearTimeout(timeoutId)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isBooped])
 
   const trigger = useCallback(() => {

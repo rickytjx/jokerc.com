@@ -9,7 +9,7 @@ import {
   throttleTime,
 } from 'rxjs'
 
-const BackToTop = () => {
+function BackToTop() {
   const [visible, setVisible] = useState(false)
   const ref = useRef<HTMLDivElement>(null)
 
@@ -28,7 +28,7 @@ const BackToTop = () => {
         map(() => window.scrollY > 500),
         distinctUntilChanged(),
       )
-      .subscribe(bool => {
+      .subscribe((bool) => {
         setVisible(bool)
       })
     return () => sub.unsubscribe()

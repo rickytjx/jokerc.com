@@ -1,8 +1,9 @@
-import React, { PropsWithChildren } from 'react'
+import type { PropsWithChildren } from 'react'
+import React from 'react'
 
 export interface PageContainerProps {}
 
-const PageContainer: React.FC<PropsWithChildren<PageContainerProps>> = props => {
+const PageContainer: React.FC<PropsWithChildren<PageContainerProps>> = (props) => {
   const { children } = props
 
   return (

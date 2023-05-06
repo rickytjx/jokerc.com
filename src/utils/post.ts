@@ -1,5 +1,5 @@
-import { promises as fs } from 'fs'
-import path from 'path'
+import { promises as fs } from 'node:fs'
+import path from 'node:path'
 import glob from 'fast-glob'
 import matter from 'gray-matter'
 import { orderBy, take } from 'lodash'
@@ -22,7 +22,7 @@ export async function getLatestPosts({
 } = {}) {
   const postsPath = await getAllPostPaths()
   const allPosts = await Promise.all(
-    postsPath.map(async path => {
+    postsPath.map(async (path) => {
       const slug = getSlugByPostPath(path)
       const frontmatter = await getPostFrontmatterBySlug(slug)
 
@@ -57,6 +57,7 @@ export async function getAdjacentPosts(slug: string) {
   const posts = await getLatestPosts({ orderBy: 'asc' })
   const idx = posts.findIndex(post => post.slug === slug)
   const prevPosts = idx > 0 ? posts[idx - 1] : undefined
+  // eslint-disable-next-line no-mixed-operators
   const nextPosts = idx !== -1 && idx < posts.length - 1 ? posts[idx + 1] : undefined
 
   return {

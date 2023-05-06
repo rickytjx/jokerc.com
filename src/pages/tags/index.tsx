@@ -1,10 +1,10 @@
 import React, { useMemo } from 'react'
-import styles from './styles.module.scss'
-import { GetStaticProps } from 'next'
-import { getLatestPosts } from '@/utils/post'
+import type { GetStaticProps } from 'next'
 import Link from 'next/link'
 import { animated, useTransition } from '@react-spring/web'
 import classNames from 'classnames'
+import styles from './styles.module.scss'
+import { getLatestPosts } from '@/utils/post'
 import useTranslation from '@/hooks/useTranslation'
 
 const FONT_MIN = 12
@@ -21,7 +21,7 @@ export interface TagsProps {
   tags: TagsInfo[]
 }
 
-const Tags: NextPageWithCustomProps<TagsProps> = props => {
+const Tags: NextPageWithCustomProps<TagsProps> = (props) => {
   const { tags } = props
   const { t } = useTranslation()
   const transitions = useTransition(tags, {
@@ -76,13 +76,14 @@ const Tags: NextPageWithCustomProps<TagsProps> = props => {
   )
 }
 
-export const getStaticProps: GetStaticProps<any, { slug: string }> = async ({ locale }) => {
+export const getStaticProps: GetStaticProps<any, { slug: string }> = async () => {
   const posts = await getLatestPosts({ orderBy: 'asc' })
   const tags: Record<string, TagsInfo> = {}
 
   for (const post of posts) {
     for (const tag of post.frontmatter.tags || []) {
-      if (!tags[tag]) tags[tag] = { tagName: tag, postsNum: 0 }
+      if (!tags[tag])
+        tags[tag] = { tagName: tag, postsNum: 0 }
       tags[tag].postsNum++
     }
   }

@@ -1,12 +1,12 @@
-import { promises as fs } from 'fs'
+import { promises as fs } from 'node:fs'
 import { Feed } from 'feed'
 import { getLatestPosts } from '@/utils/post'
 
 const DOMAIN = 'https://jokerc.com'
 
 export default async function generateRssFeed() {
-  const allPosts = await getLatestPosts();
-  const site_url = DOMAIN;
+  const allPosts = await getLatestPosts()
+  const site_url = DOMAIN
 
   const feedOptions = {
     title: 'Ricky Tang | RSS Feed',
@@ -23,9 +23,9 @@ export default async function generateRssFeed() {
       json: `${site_url}/rss.json`,
       atom: `${site_url}/atom.xml`,
     },
-  };
+  }
 
-  const feed = new Feed(feedOptions);
+  const feed = new Feed(feedOptions)
 
   allPosts.forEach((post: any) => {
     feed.addItem({
@@ -34,12 +34,12 @@ export default async function generateRssFeed() {
       link: `${site_url}/posts/${post.slug}`,
       // description: post.description,
       date: new Date(post.frontmatter.date),
-    });
-  });
+    })
+  })
 
-  fs.writeFile('./public/rss.xml', feed.rss2());
+  fs.writeFile('./public/rss.xml', feed.rss2())
 
   // write other feed formats to public folder
-  fs.writeFile('./public/rss.json', feed.json1());
-  fs.writeFile('./public/atom.xml', feed.atom1());
+  fs.writeFile('./public/rss.json', feed.json1())
+  fs.writeFile('./public/atom.xml', feed.atom1())
 }

@@ -9,9 +9,10 @@ const json = {
   'zh-CN': zhCN,
 }[language]
 
-const useTranslation = () => {
+function useTranslation() {
   const t = useCallback((key: keyof typeof en, values: Record<string, any> = {}) => {
-    if (!json || (json && !json[key])) return key
+    if (!json || (json && !json[key]))
+      return key
     return json[key].replace(/{{\s*(\w+)\s*}}/g, (match, key: string) => values[key])
   }, [])
 

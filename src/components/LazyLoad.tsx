@@ -1,4 +1,5 @@
-import React, { CSSProperties, ReactElement, ReactNode, useEffect, useRef, useState } from 'react'
+import type { CSSProperties, ReactElement, ReactNode } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 
 export interface LazyLoadProps {
   children: ReactElement
@@ -9,20 +10,20 @@ export interface LazyLoadProps {
   placeholder?: ReactNode
 }
 
-const LazyLoad: React.FC<LazyLoadProps> = props => {
+const LazyLoad: React.FC<LazyLoadProps> = (props) => {
   const { children, className, style, offset = 100, height, placeholder } = props
   const containerRef = useRef<HTMLDivElement>(null)
   const [visible, setVisible] = useState(false)
 
   useEffect(() => {
     const dom = containerRef.current
-    if (!dom) return
+    if (!dom)
+      return
     const observer = new IntersectionObserver(
-      entries => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting)
             setVisible(true)
-          }
         })
       },
       {
@@ -35,7 +36,7 @@ const LazyLoad: React.FC<LazyLoadProps> = props => {
 
   return (
     <div ref={containerRef} className={className} style={style}>
-      {visible ? children : placeholder ?? <div style={{ height: height }} />}
+      {visible ? children : placeholder ?? <div style={{ height }} />}
     </div>
   )
 }

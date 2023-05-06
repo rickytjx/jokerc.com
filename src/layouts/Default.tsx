@@ -1,12 +1,13 @@
 import React from 'react'
 import Splash from '../components/Splash'
-import PostList, { PostListProps } from '../components/PostList'
+import type { PostListProps } from '../components/PostList'
+import PostList from '../components/PostList'
 
 export interface DefaultLayoutProps {
   posts: PostListProps['posts']
 }
 
-const DefaultLayout: React.FC<DefaultLayoutProps> = props => {
+const DefaultLayout: React.FC<DefaultLayoutProps> = (props) => {
   const { posts } = props
 
   return (

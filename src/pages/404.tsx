@@ -2,7 +2,7 @@ import React from 'react'
 import { useRouter } from 'next/router'
 
 const title = 'Whooops!'
-const message = "Sorry, the page you are looking for doesn't exist"
+const message = 'Sorry, the page you are looking for doesn\'t exist'
 
 const NotFound: NextPageWithCustomProps = () => {
   const router = useRouter()

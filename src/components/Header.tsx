@@ -1,11 +1,9 @@
 import React, { useEffect, useMemo, useRef } from 'react'
 import Link from 'next/link'
-import DarkModeToggle from './DarkModeToggle.old'
 import config from 'config'
 import { useBoolean, useSize } from 'ahooks'
 import { animated, useSpring, useTransition } from '@react-spring/web'
-import { RiArticleLine, RiPriceTag2Line } from "react-icons/ri";
-import BurgerMenu from '@/components/BurgerMenu'
+import { RiArticleLine, RiPriceTag2Line } from 'react-icons/ri'
 import {
   animationFrameScheduler,
   distinctUntilChanged,
@@ -17,6 +15,7 @@ import {
   throttleTime,
   withLatestFrom,
 } from 'rxjs'
+import DarkModeToggle from './DarkModeToggle.old'
 import useHasMounted from '@/hooks/useHasMounted'
 import useTranslation from '@/hooks/useTranslation'
 
@@ -33,7 +32,6 @@ const Header: React.FC<HeaderProps> = () => {
       { label: t('nav.tags'), href: '/tags', icon: <RiPriceTag2Line aria-hidden/> },
       // { label: t('nav.about'), href: '/about' },
     ],
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     [],
   )
   const mobileNavContentRef = useRef<HTMLDivElement>(null)
@@ -56,7 +54,8 @@ const Header: React.FC<HeaderProps> = () => {
   })
 
   useEffect(() => {
-    if (!visible) setExpanded(false)
+    if (!visible)
+      setExpanded(false)
   }, [visible])
 
   useEffect(() => {
@@ -80,7 +79,7 @@ const Header: React.FC<HeaderProps> = () => {
         map(([scrollY, anchor]) => scrollY <= 500 || scrollY < anchor),
         distinctUntilChanged(),
       )
-      .subscribe(v => {
+      .subscribe((v) => {
         setVisible(v)
       })
 

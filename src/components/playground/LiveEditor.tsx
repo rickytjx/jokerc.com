@@ -1,10 +1,12 @@
 import React, { useContext } from 'react'
-import styles from './LiveEditor.module.scss'
-import { NativeProps, withNativeProps } from '@/utils/native-props'
-import Highlight, { defaultProps, PrismTheme } from 'prism-react-renderer'
+import type { PrismTheme } from 'prism-react-renderer'
+import Highlight, { defaultProps } from 'prism-react-renderer'
 import Editor from 'react-simple-code-editor'
-import { LiveContext } from './LiveProvider'
 import classNames from 'classnames'
+import { LiveContext } from './LiveProvider'
+import styles from './LiveEditor.module.scss'
+import { withNativeProps } from '@/utils/native-props'
+import type { NativeProps } from '@/utils/native-props'
 
 export interface LiveEditorProps extends NativeProps {
   fontSize?: number
@@ -19,8 +21,8 @@ export interface LiveEditorProps extends NativeProps {
   lineNumbers?: boolean
 }
 
-const LiveEditor: React.FC<LiveEditorProps> = props => {
-  const { code, language, onCodeChange } = useContext(LiveContext)
+const LiveEditor: React.FC<LiveEditorProps> = (props) => {
+  const { code, setCode, language } = useContext(LiveContext)
   const {
     fontSize = 16,
     disabled,
@@ -43,7 +45,7 @@ const LiveEditor: React.FC<LiveEditorProps> = props => {
           'has-line-numbers': lineNumbers,
         })}
         value={code}
-        onValueChange={onCodeChange}
+        onValueChange={setCode}
         disabled={disabled}
         tabSize={2}
         style={{
@@ -58,7 +60,6 @@ const LiveEditor: React.FC<LiveEditorProps> = props => {
             {({ className, style, tokens, getLineProps, getTokenProps }) => (
               <>
                 {tokens.map((line, i) => (
-                  // eslint-disable-next-line react/jsx-key
                   <div
                     {...getLineProps({
                       line,
@@ -82,7 +83,6 @@ const LiveEditor: React.FC<LiveEditorProps> = props => {
                         </span>
                       )}
                       {line.map((token, key) => (
-                        // eslint-disable-next-line react/jsx-key
                         <span {...getTokenProps({ token, key })} />
                       ))}
                     </>

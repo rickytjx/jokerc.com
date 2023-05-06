@@ -1,5 +1,6 @@
-import React from 'react'
-import dynamic, { DynamicOptions } from 'next/dynamic'
+import type React from 'react'
+import type { DynamicOptions } from 'next/dynamic'
+import dynamic from 'next/dynamic'
 
 export function withNoSSR<P = {}>(
   Component: React.ComponentType<P>,
