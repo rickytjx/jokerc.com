@@ -2,13 +2,22 @@
   "nav.home": "主页",
   "nav.blog": "博客",
   "nav.tags": "标签",
+  "nav.friends": "友链",
   "nav.about": "关于",
 
-  "post-page.last-updated": "最后更新于 {{ date }}",
+  "post-page.hits": "浏览量",
+  "post-page.last-updated": "最后修改于",
   "post-page.reading-time": "阅读时长 {{ minutes }} 分钟",
+  "post-page.outdated-notice": "此文最后修改于 {{ days }} 天前，可能包含很多不再适用的废话，阅读需谨慎～",
 
   "tags-page.title": "标签",
   "tags-page.desc": "共 {{ count }} 个标签",
+
+  "friends-page.title": "朋友们",
+  "friends-page.desc": "共 {{ count }} 个友链",
+
+  "code.copy": "复制",
+  "code.copied": "✓ 已复制",
 
   "share": "分享"
 }

@@ -1,9 +1,9 @@
 import React from 'react'
-import type { LiveEditorProps } from '@/components/playground/LiveEditor'
-import LiveEditor from '@/components/playground/LiveEditor'
+import type { EditorProps } from '@/components/CodeBlock/playground/Editor'
+import PlaygroundEditor from '@/components/CodeBlock/playground/Editor'
 
-const Editor: React.FC<LiveEditorProps> = (props) => {
-  return <LiveEditor {...props} />
+const Editor: React.FC<EditorProps> = (props) => {
+  return <PlaygroundEditor {...props} />
 }
 
 export default Editor

@@ -4,16 +4,11 @@
 
 @layer components {
   .prose-container {
-    @apply max-w-[73ch] mx-auto px-[1.5ch];
+    @apply max-w-[68ch] mx-auto px-[1.5ch];
   }
 
-  .divider {
-    @apply box-content my-12 h-px dark:bg-zinc-800 dark:border-black transition-colors;
-  }
-
-  .overflow-overlay {
-    overflow: auto;
-    overflow: overlay;
+  .prose-bleed {
+    @apply mx-0 sm:-mx-[1.5ch];
   }
 
   .better-scrollbar {
@@ -37,42 +32,6 @@
       background-color: transparent;
     }
   }
-
-  .me {
-    p,
-    ul {
-      @apply my-4 leading-loose;
-    }
-
-    h2 {
-      @apply text-2xl font-medium mt-10 mb-4;
-    }
-
-    p {
-    }
-
-    ul {
-      list-style: inside;
-    }
-
-    a {
-      @apply text-primary underline hover:brightness-75;
-    }
-  }
-
-
-  .author {
-    a {
-      font-weight: inherit;
-      text-decoration: none;
-      border-bottom: 1px solid transparent;
-      transition: border .3s ease-in-out
-    }
-
-    a:hover {
-      @apply border-b border-solid border-zinc-500;
-    }
-  }
 }
 
 html,
@@ -81,15 +40,23 @@ body {
   margin: 0;
 }
 
-/*html {*/
-/*  scroll-behavior: smooth;*/
-/*}*/
+// html {
+//   scroll-behavior: smooth;
+// }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, avenir next, avenir, segoe ui, helvetica neue,
-    helvetica, Cantarell, Ubuntu, roboto, noto, arial, sans-serif;
-  font-size: 16px;
+  // https://systemfontstack.com/
+  // font-family: -apple-system, BlinkMacSystemFont, avenir next, avenir, segoe ui, helvetica neue,
+  //   helvetica, Cantarell, Ubuntu, roboto, noto, arial, sans-serif;
   touch-action: manipulation;
   -webkit-tap-highlight-color: transparent;
-  @apply text-zinc-800 bg-white dark:text-zinc-50 dark:bg-zinc-900;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+  @apply text-base text-zinc-800 bg-white dark:text-zinc-50 dark:bg-zinc-950;
+
+  ::selection {
+    @apply bg-primary/20;
+  }
 }

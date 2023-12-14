@@ -1,4 +1,4 @@
-type NextPageWithCustomProps<P = {}, IP = P> = import('next').NextPage<P, IP> & {
+type NextPageWithCustomProps<P, IP = P> = import('next').NextPage<P, IP> & {
   getLayout?: (page: import('react').ReactElement) => import('react').ReactNode
   theme?: string
 }
@@ -20,6 +20,7 @@ interface PostFrontmatter {
   draft?: boolean // 为 true 则不会展示该文章
   isShare?: boolean // 是否开启分享，默认为 false
   shareUrl?: string // 分享链接
+  [key: string]: any
 }
 
 interface PostReadingTime {
@@ -27,4 +28,8 @@ interface PostReadingTime {
   text: string
   time: number
   words: number
+}
+
+declare namespace Intl {
+  function getCanonicalLocales(locales: string | string[]): string[]
 }

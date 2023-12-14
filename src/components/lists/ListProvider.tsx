@@ -9,7 +9,6 @@ export interface ListContext {
   type: ListProviderProps['type']
 }
 
-// eslint-disable-next-line @typescript-eslint/no-redeclare
 export const ListContext = createContext({} as ListContext)
 
 const ListProvider: React.FC<PropsWithChildren<ListProviderProps>> = (props) => {

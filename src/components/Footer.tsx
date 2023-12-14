@@ -8,10 +8,22 @@ function Footer() {
   return (
     <div className="flex flex-col items-center mt-16 mb-6 text-sm">
       <span className="font-medium">
-        Powered By <a href="https://nextjs.org" className="text-primary no-underline">Next.js</a> • Deployed on <a href="https://cloud.tencent.com" className="text-primary">Tencent Cloud</a>
+        Powered By
+        {' '}
+        <a href="https://nextjs.org" className="text-primary no-underline">Next.js</a>
+        {' '}
+        • Deployed on
+        {' '}
+        <a href="https://cloud.tencent.com" className="text-primary">Tencent Cloud</a>
       </span>
       <div className="mt-2 opacity-50">
-        <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="nofollow noopener noreferrer">CC BY-NC-SA 4.0</a> &copy; {new Date().getFullYear()}&nbsp;{config.name}
+        <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="nofollow noopener noreferrer">CC BY-NC-SA 4.0</a>
+        {' '}
+        &copy;
+        {' '}
+        {new Date().getFullYear()}
+        &nbsp;
+        {config.name}
       </div>
       {/* {config.busuanzi && ( */}
       {/*  <> */}

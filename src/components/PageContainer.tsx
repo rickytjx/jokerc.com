@@ -1,13 +1,9 @@
 import type { PropsWithChildren } from 'react'
 import React from 'react'
 
-export interface PageContainerProps {}
-
-const PageContainer: React.FC<PropsWithChildren<PageContainerProps>> = (props) => {
-  const { children } = props
-
+const PageContainer: React.FC<PropsWithChildren> = ({ children }) => {
   return (
-    <div className="relative w-full min-h-[calc(100vh-50px)] sm:min-h-[calc(100vh-80px)]" id="router">
+    <div className="relative w-full min-h-[calc(100vh-50px)] sm:min-h-[calc(100vh-80px)]">
       {children}
     </div>
   )

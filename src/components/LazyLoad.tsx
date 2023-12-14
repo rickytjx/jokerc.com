@@ -1,5 +1,6 @@
 import type { CSSProperties, ReactElement, ReactNode } from 'react'
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef } from 'react'
+import useBoolean from '@/hooks/useBoolean'
 
 export interface LazyLoadProps {
   children: ReactElement
@@ -13,7 +14,7 @@ export interface LazyLoadProps {
 const LazyLoad: React.FC<LazyLoadProps> = (props) => {
   const { children, className, style, offset = 100, height, placeholder } = props
   const containerRef = useRef<HTMLDivElement>(null)
-  const [visible, setVisible] = useState(false)
+  const [isVisible, { setTrue }] = useBoolean(false)
 
   useEffect(() => {
     const dom = containerRef.current
@@ -23,7 +24,7 @@ const LazyLoad: React.FC<LazyLoadProps> = (props) => {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting)
-            setVisible(true)
+            setTrue()
         })
       },
       {
@@ -32,11 +33,12 @@ const LazyLoad: React.FC<LazyLoadProps> = (props) => {
     )
     observer.observe(dom)
     return () => observer.disconnect()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [offset])
 
   return (
     <div ref={containerRef} className={className} style={style}>
-      {visible ? children : placeholder ?? <div style={{ height }} />}
+      {isVisible ? children : placeholder ?? <div style={{ height }} />}
     </div>
   )
 }

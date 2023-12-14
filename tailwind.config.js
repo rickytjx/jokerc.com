@@ -1,15 +1,16 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    './src/pages/**/*.{js,ts,jsx,tsx}',
-    './src/components/**/*.{js,ts,jsx,tsx}',
-    './src/layouts/**/*.{js,ts,jsx,tsx}',
+    './app/**/*.{js,ts,jsx,tsx,mdx}',
+    './pages/**/*.{js,ts,jsx,tsx,mdx}',
+    './components/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   darkMode: ['class', '[data-theme="dark"]'],
   theme: {
     extend: {
       colors: {
-        primary: '#6366f1',
+        primary: '#14b8a6',
       },
       transitionTimingFunction: {
         'out-back': 'cubic-bezier(0.34, 1.56, 0.64, 1)',
@@ -18,13 +19,25 @@ module.exports = {
         'center-bottom': '50% 100%',
       },
       keyframes: {
-        floating: {
-          '0%': { transform: 'translate(0, 0)' },
-          '100%': { transform: 'translate(0, 10%)' },
+        // spinner
+        'intense-pulse': {
+          '0%': { opacity: 0.2 },
+          '20%': { opacity: 1, transform: 'translateX(1px)' },
+          '100%': { opacity: 0.2 },
         },
-      },
-      animation: {
-        floating: 'floating 4s ease-in-out infinite alternate',
+        // 404 page
+        floating: {
+          '50%': { transform: 'translate(0, -10%)' },
+        },
+        // hit counter
+        'backdrop-flicker': {
+          '50%': { 'backdrop-filter': 'blur(1px) brightness(20%)' },
+        },
+        // post outdated alert
+        'move-bg-y': {
+          '0%': { 'background-position': '0 0' },
+          '100%': { 'background-position': '0 100%' },
+        },
       },
     },
   },

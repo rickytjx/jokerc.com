@@ -1,44 +1,51 @@
 import React from 'react'
 import Link from 'next/link'
 import dayjs from 'dayjs'
+import DesktopOnly from './DesktopOnly'
+import MobileOnly from './MobileOnly'
 import useTranslation from '@/hooks/useTranslation'
 
 export interface PostListProps {
-  posts: Post[]
+  posts: {
+    slug: string
+    frontmatter: PostFrontmatter
+  }[]
+  dateFormat?: string
 }
 
 const PostList: React.FC<PostListProps> = (props) => {
-  const { posts } = props
+  const { posts = [], dateFormat = 'MMMM D' } = props
   const { t } = useTranslation()
 
   return (
-    <div className="flex-1">
+    <>
       {posts.map(({ frontmatter, slug }, idx) => (
-        <div key={idx}>
-          {(idx === 0
-            || dayjs(posts[idx - 1].frontmatter.date).year() !== dayjs(frontmatter.date).year()) && (
-              <h2 className="font-medium text-2xl before:content-['#_'] before:text-primary">
-                {dayjs(frontmatter.date).year()}
-              </h2>
+        <article key={idx} className="my-8">
+          <h3 className="text-lg font-medium">
+            <Link
+              className="hover:text-primary transition-colors"
+              href={`/posts/${slug}`}
+              prefetch={false}
+            >
+              {frontmatter.isShare && (
+                <DesktopOnly>
+                  <span className="align-middle text-xs mr-2 -ml-[2.625rem] bg-zinc-800 text-zinc-300 rounded px-1 py-1">{ t('share') }</span>
+                </DesktopOnly>
+              )}
+              <span className="align-middle">{frontmatter.title}</span>
+            </Link>
+          </h3>
+          <span className="font-medium inline-block text-sm mt-2 text-zinc-400 dark:text-zinc-500">
+            {dayjs(frontmatter.date).format(dateFormat)}
+          </span>
+          {frontmatter.isShare && (
+            <MobileOnly>
+              <span className="align-middle text-xs ml-2 bg-zinc-800 text-zinc-300 rounded px-1 py-1">{ t('share') }</span>
+            </MobileOnly>
           )}
-          <article key={idx} className="my-8">
-            <h3 className="text-lg leading-[1.2em]">
-              <Link href={`/posts/${slug}`}>
-                <a className="hover:text-primary transition-all">
-                  {frontmatter.isShare && (
-                    <span className="align-middle text-xs mr-2 sm:-ml-[2.625rem] border rounded border-current px-1 pb-0.2">{ t('share') }</span>
-                  )}
-                  <span className="align-middle">{frontmatter.title}</span>
-                </a>
-              </Link>
-            </h3>
-            <span className="font-medium inline-block text-sm mt-2 opacity-50">
-              {dayjs(frontmatter.date).format('LL')}
-            </span>
-          </article>
-        </div>
+        </article>
       ))}
-    </div>
+    </>
   )
 }
 

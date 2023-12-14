@@ -1,24 +1,32 @@
-import { FiGithub, FiLink, FiRss, FiTwitter } from 'react-icons/fi'
+// import { FiRss } from 'react-icons/fi'
 
 const config = {
   name: 'Ricky Tang',
-  title: "Ricky Tang",
-  desc: 'Full-stack Developer / Open Sourceror / Blogger',
+  title: 'Ricky Tang',
+  description: 'Full-stack Developer / Open Sourceror / Blogger',
   avatar: '/avatar.png',
   logo: '/logo.svg',
-  socials: [
-    { label: 'Github', icon: <FiGithub className="text-lg" aria-hidden />, link: 'https://github.com/rickytjx' },
-    { label: 'Twitter', icon: <FiTwitter className="text-lg" aria-hidden />, link: 'https://twitter.com/rickytjx' },
-    { label: '友链', icon: <FiLink className="text-lg" aria-hidden />, link: '/blogroll' },
+  siteUrl: 'https://www.jokerc.com',
+  links: [
+    { name: 'GitHub', link: 'https://github.com/rickytjx' },
+    { name: 'X', link: 'https://twitter.com/rickytjx' },
+    { name: 'RSS', link: '/feed.xml' },
   ],
-  rss: { label: 'RSS', icon: <FiRss className="text-2xl" aria-hidden />, link: 'https://jokerc.com/rss.xml' },
-  blogroll: [],
+  friends: [
+    { name: '', link: '' },
+  ],
+  // rss: { label: 'RSS', icon: <FiRss className="text-2xl" aria-hidden />, link: 'https://jokerc.com/rss.xml' },
   language: 'en', // en | zh-CN
-  toc: true, // table of content
-  adjacentPosts: true, // prev next links
+  // 侧边目录
+  toc: true,
+  // 显示上一篇下一篇按钮
+  adjacentPosts: true,
+  // 配置文章过时提醒阈值
+  outdatedPostThresholdDays: 90,
   markdown: {
-    lineNumbers: false
-  }
+    // 统一配置 CodeBlock 是否显示行号，也可以在 frontmatter 中通过 lineNumbers 字段单独设置
+    lineNumbers: false,
+  },
 }
 
 export default config

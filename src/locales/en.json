@@ -2,13 +2,22 @@
   "nav.home": "Home",
   "nav.blog": "Blog",
   "nav.tags": "Tags",
+  "nav.friends": "Friends",
   "nav.about": "About",
 
-  "post-page.last-updated": "Last Updated: {{ date }}",
+  "post-page.hits": "HITS",
+  "post-page.last-updated": "LAST UPDATED",
   "post-page.reading-time": "{{ minutes }} min read",
+  "post-page.outdated-notice": "This post was last modified {{ days }} days ago, and some of the content may be outdated.",
 
   "tags-page.title": "Tags",
   "tags-page.desc": "{{ count }} tags in total",
+
+  "friends-page.title": "Friends",
+  "friends-page.desc": "{{ count }} friends in total",
+
+  "code.copy": "Copy",
+  "code.copied": "Copied!",
 
   "share": "分享"
 }
