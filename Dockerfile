@@ -27,7 +27,7 @@ COPY . .
 # ENV NEXT_TELEMETRY_DISABLED 1
 
 # RUN yarn global add pnpm
-RUN npm run build
+RUN yarn build
 
 FROM base as production-stage
 WORKDIR /app
@@ -40,6 +40,10 @@ RUN adduser --system --uid 1001 nextjs
 
 COPY --from=build-stage /app/public ./public
 
+# Set the correct permission for prerender cache
+RUN mkdir .next
+RUN chown nextjs:nodejs .next
+
 # Automatically leverage output traces to reduce image size
 # https://nextjs.org/docs/advanced-features/output-file-tracing
 COPY --from=build-stage --chown=nextjs:nodejs /app/.next/standalone ./
@@ -50,5 +54,9 @@ USER nextjs
 EXPOSE 3000
 
 ENV PORT 3000
+# set hostname to localhost
+ENV HOSTNAME "0.0.0.0"
 
+# server.js is created by next build from the standalone output
+# https://nextjs.org/docs/pages/api-reference/next-config-js/output
 CMD ["node", "server.js"]
