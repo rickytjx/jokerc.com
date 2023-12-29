@@ -15,6 +15,7 @@ function Footer() {
         • Deployed on
         {' '}
         <a href="https://cloud.tencent.com" className="text-primary">Tencent Cloud</a>
+        {' '}
       </span>
       <div className="mt-2 opacity-50">
         <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="nofollow noopener noreferrer">CC BY-NC-SA 4.0</a>
@@ -22,8 +23,12 @@ function Footer() {
         &copy;
         {' '}
         {new Date().getFullYear()}
-        &nbsp;
+        {' '}
         {config.name}
+        {' '}
+        •
+        {' '}
+        <a href="https://beian.miit.gov.cn/">沪ICP备2022012076号-1</a>
       </div>
       {/* {config.busuanzi && ( */}
       {/*  <> */}
