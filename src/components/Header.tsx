@@ -15,7 +15,7 @@ import {
   throttleTime,
   withLatestFrom,
 } from 'rxjs'
-import { RiArticleLine, RiPriceTag2Line } from 'react-icons/ri'
+import { RiArticleLine, RiLightbulbLine, RiPriceTag2Line } from 'react-icons/ri'
 import config from 'config'
 import DarkModeToggle from './DarkModeToggle'
 import MobileOnly from './MobileOnly'
@@ -97,6 +97,7 @@ function Header() {
   const menus = useMemo(
     () => [
       { label: t('nav.blog'), href: '/posts', icon: <RiArticleLine aria-hidden /> },
+      { label: t('nav.project'), href: '/projects', icon: <RiLightbulbLine aria-hidden /> },
       { label: t('nav.tags'), href: '/tags', icon: <RiPriceTag2Line aria-hidden /> },
       // { label: t('nav.friends'), href: '/friends' },
     ],

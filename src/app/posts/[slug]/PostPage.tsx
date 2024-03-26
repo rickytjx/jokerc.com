@@ -14,11 +14,13 @@ import Author from '@/components/Author'
 import { ArrowLeft, ArrowRight, Calender, Click, Clock } from '@/components/icons'
 import type { BleedThroughImageProps } from '@/components/BleedThroughImage'
 import BleedThroughImage from '@/components/BleedThroughImage'
+import { Heading } from '@/components/TableOfContents'
 
 export interface PostPageProps {
   slug: string
   code: string
   frontmatter: PostFrontmatter
+  headings?: Heading[]
   prevPost?: { link: string, title: string }
   nextPost?: { link: string, title: string }
   heroImageInfo?: BleedThroughImageProps
@@ -29,7 +31,8 @@ const PostPage: React.FC<PostPageProps> = (props) => {
   const {
     slug,
     code,
-    frontmatter: { title, date, updatedOn, tags, toc = config.toc, heroImage, isShare = false, shareUrl },
+    frontmatter: { title, date, updatedOn, tags, heroImage, isShare = false, shareUrl },
+    headings,
     prevPost,
     nextPost,
     heroImageInfo,
@@ -171,7 +174,7 @@ const PostPage: React.FC<PostPageProps> = (props) => {
           </main>
 
           <DesktopOnly>
-            <PostRightAside slug={slug} toc={toc} />
+            <PostRightAside slug={slug} headings={headings} />
           </DesktopOnly>
         </div>
       </PostViewsProvider>

@@ -14,6 +14,7 @@ import Header from '@/components/Header'
 import PageContainer from '@/components/PageContainer'
 import Footer from '@/components/Footer'
 import BackToTop from '@/components/BackToTop'
+import DesktopOnly from '@/components/DesktopOnly'
 import { getSiteUrl } from '@/utils/url'
 
 const inter = Inter({
@@ -56,7 +57,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <Header />
           <PageContainer>{children}</PageContainer>
           <Footer />
-          <BackToTop />
+          {config.backToTopButton && (
+            <DesktopOnly>
+              <BackToTop />
+            </DesktopOnly>
+          )}
         </ThemeProvider>
       </body>
     </html>

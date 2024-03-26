@@ -2,14 +2,14 @@
 
 import { useEffect, useMemo } from 'react'
 import { usePathname, useRouter } from 'next/navigation'
-import { Subject, first, fromEvent, map, of, switchMap } from 'rxjs'
+import { Subject, first, map, of, switchMap } from 'rxjs'
+import { visibilityChange$ } from '@/utils/observables'
 
 // eslint-disable-next-line import/no-mutable-exports
 let AutoRefresh = function AutoRefresh() {
   return null
 }
 
-// eslint-disable-next-line node/prefer-global/process
 if (process.env.NODE_ENV === 'development') {
   AutoRefresh = function AutoRefresh() {
     const router = useRouter()
@@ -17,7 +17,7 @@ if (process.env.NODE_ENV === 'development') {
     const subject = useMemo(() => new Subject<void>(), [])
 
     useEffect(() => {
-      const visible$ = fromEvent(document, 'visibilitychange').pipe(map(() => !document.hidden))
+      const visible$ = visibilityChange$.pipe(map(() => !document.hidden))
       const sub = subject
         .pipe(
           switchMap(() => {

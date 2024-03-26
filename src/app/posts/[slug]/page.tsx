@@ -11,6 +11,9 @@ import remarkReadingTime from 'remark-reading-time'
 import remarkReadingMdxTime from 'remark-reading-time/mdx'
 import type { Metadata } from 'next'
 import config from 'config'
+import { visit } from 'unist-util-visit'
+import type { Plugin } from 'unified'
+import type { Element, Root, Text } from 'hast'
 import PostPage from './PostPage'
 import AutoRefresh from './AutoRefresh'
 import remarkMdxCodeProps from '@/lib/unified/remark-mdx-code-props'
@@ -19,6 +22,7 @@ import remarkImageInfo from '@/lib/unified/remark-image-info'
 import { getAdjacentPosts, getAllPosts, getPostFrontmatter, getPostSlug } from '@/utils/post'
 import { getImageInfo } from '@/utils/image'
 import remarkAdmonitions from '@/lib/unified/remark-admonitions'
+import type { Heading } from '@/components/TableOfContents'
 
 export async function generateStaticParams() {
   const posts = await getAllPosts()
@@ -45,12 +49,11 @@ export async function generateMetadata({ params }: { params: { slug: string } })
 
 export default async function Post({ params }: { params: { slug: string } }) {
   const slug = decodeURIComponent(params.slug)
+  const headings: Heading[] = []
   const { code, frontmatter } = await bundleMDX<PostFrontmatter>({
-    // eslint-disable-next-line node/prefer-global/process
     file: path.join(process.cwd(), `./posts/${slug}.mdx`),
-    // eslint-disable-next-line node/prefer-global/process
     cwd: path.join(process.cwd(), './posts'),
-    mdxOptions(options, _frontmatter) {
+    mdxOptions(options, frontmatter) {
       // this is the recommended way to add custom remark/rehype plugins:
       // The syntax might look weird, but it protects you in case we add/remove
       // plugins in the future.
@@ -74,6 +77,20 @@ export default async function Post({ params }: { params: { slug: string } }) {
         rehypeKatex,
       ]
 
+      if (frontmatter.toc ?? config.toc) {
+        options.rehypePlugins.push((() => (tree) => {
+          visit(tree, 'element', (node: Element, idx, parent) => {
+            if (['h2', 'h3', 'h4', 'h5', 'h6'].includes(node.tagName) && parent?.type === 'root') {
+              headings.push({
+                id: node.properties!.id as string,
+                text: ((node.children[0] as Element).children[0] as Text).value,
+                level: Number(node.tagName.substring(1)),
+              })
+            }
+          })
+        }) as Plugin<[], Root>)
+      }
+
       return options
     },
     esbuildOptions(options, _frontmatter) {
@@ -94,6 +111,7 @@ export default async function Post({ params }: { params: { slug: string } }) {
         slug={slug}
         code={code}
         frontmatter={frontmatter}
+        headings={headings}
         heroImageInfo={heroImageInfo}
         prevPost={prev ? { link: `/posts/${prev.slug}`, title: prev.frontmatter.title } : undefined}
         nextPost={next ? { link: `/posts/${next.slug}`, title: next.frontmatter.title } : undefined}
